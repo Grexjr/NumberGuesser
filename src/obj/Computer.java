@@ -36,7 +36,24 @@ public class Computer {
     public boolean higherLower(int guess){return guess > this.secretNumber;}
 
     // String for result
+    public String tellResult(int guess){
+        if(checkGuess(guess)){
+            return "You... win!? Impossible! \n" +
+                    "Malfunctioning... need... System... reset.... \n";
+        }
+        if(!checkGuess(guess)){
+            String incorrectGuess = "You fool... INCORRECT! \n";
 
+            if(higherLower(guess)){
+                return incorrectGuess +
+                        "You'll never guess that my number is lower than your guess! \n";
+            }
+            return incorrectGuess +
+                    "You'll never guess that my number is higher than your guess! \n";
+        }
+        System.exit(0);
+        return "SYSTEM ERROR: BAD CASE";
+    }
 
 
 
