@@ -42,6 +42,20 @@ public class Player {
 
     public void winRound(){this.setRoundsWon(incrementWonRounds());}
 
+    // Make choice methods
+    public Choice detectChoice(int choiceSet){
+        ArrayList<Choice> possibleChoices = Choice.possibleChoices(choiceSet);
+        Scanner kb = new Scanner(System.in);
+        String choice = kb.nextLine();
+
+        for(Choice bankedChoice : possibleChoices){
+            if(choice.equalsIgnoreCase(bankedChoice.getChoiceLabel())){
+                return bankedChoice;
+            }
+        }
+        return Choice.INVALID;
+    }
+
 
 
 

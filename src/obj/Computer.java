@@ -8,11 +8,7 @@ public class Computer {
     private final int secretNumber;
 
     // Computer constructor
-    public Computer(){
-        System.out.println(introduceSelf());
-        this.secretNumber = new Random().nextInt(0,10000);
-        System.out.println(askForGuess());
-    }
+    public Computer(){this.secretNumber = new Random().nextInt(0,10000);}
 
     // Computer methods
     // Getter
@@ -20,10 +16,12 @@ public class Computer {
 
     // Other methods
     // String to introduce self
-    public String introduceSelf(){
+    public String introduceSelf(int maxGuesses){
         return "Muahahahaha! \n" +
                 "I am an evil computer. Guess my number or perish! \n" +
-                "You have 10 guesses!";
+                "You have "  +
+                maxGuesses +
+                " guesses! \n";
     }
 
     // String to ask for guess
@@ -39,7 +37,7 @@ public class Computer {
     public String tellResult(int guess){
         if(checkGuess(guess)){
             return "You... win!? Impossible! \n" +
-                    "Malfunctioning... need... System... reset.... \n";
+                    "Malfunctioning... need... System... reset.... \n\n";
         }
         if(!checkGuess(guess)){
             String incorrectGuess = "You fool... INCORRECT! \n";
