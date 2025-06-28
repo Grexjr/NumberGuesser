@@ -4,10 +4,11 @@ import obj.Computer;
 import obj.Player;
 
 public class Round {
+    //TODO: Implement showing list of guesses when round is over
 
     // Variables required for round
     private final Computer computer;
-    private int roundNumber, maxGuesses;
+    private int roundNumber, maxGuesses, guessNumber;
     private boolean roundOver;
 
     public Round(int roundNumber, int guesses, Player player){

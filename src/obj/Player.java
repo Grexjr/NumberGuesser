@@ -11,7 +11,7 @@ public class Player {
 
     // Constructor for player
     public Player(){
-        this.guessList = new ArrayList<Integer>();
+        this.guessList = new ArrayList<>();
         this.shortestGuesses = 0;
         this.guessNumber = 0;
         this.roundsWon = 0;
@@ -21,6 +21,7 @@ public class Player {
     public ArrayList<Integer> getGuessList() {return guessList;}
     public int getShortestGuesses() {return this.shortestGuesses;}
     public int getGuessNumber() {return this.guessNumber;}
+    public int getRoundsWon() {return this.roundsWon;}
 
     public void setShortestGuesses(int guesses){this.shortestGuesses = guesses;}
     public void setGuessNumber(int guess){this.guessNumber = guess;}
