@@ -20,8 +20,6 @@ public class Round {
         // Set up and print round method after initialization
         player.setGuessNumber(0);
         setUpRound(this.returnGuessesLeft(player.getGuessNumber()));
-
-        playRound(player);
     }
 
     // Getters and Setters
@@ -34,18 +32,34 @@ public class Round {
     public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
     public void setRoundOver(boolean value) {this.roundOver = value;}
 
+    // === ROUND HELPER METHODS ===
+
     // General round setup method
     private void setUpRound(int maxGuesses){
         System.out.println(printRound());
         System.out.println(this.computer.introduceSelf(maxGuesses));
     }
 
-    // Other round methods
     // method to check if player loses (true loses, false not)
     public boolean checkLoss(Player player){return player.exceedsGuess(this.getMaxGuesses());}
 
+    // -- ROUND STAT METHODS --
+
+
+
+    // === PRINT ROUND METHODS ===
+
     // String return for round
     public String printRound(){return "Round: " + this.getRoundNumber();}
+
+    // Print how many guesses are left
+    public String printGuessesLeft(int numOfGuesses){
+        return "\n" +
+                returnGuessesLeft(numOfGuesses) +
+                " Guesses left!" +
+                "\n \n";}
+
+    // === PLAY ROUNDS METHODS ===
 
     // PLAY ROUND METHOD
     public void playRound(Player player){
@@ -54,6 +68,7 @@ public class Round {
             System.out.print(playRoundResults(player.guessNumber()));
             if(!this.roundOver) {System.out.print(printGuessesLeft(player.getGuessNumber()));}
         }
+        player.calculateLowestGuess();
     }
 
     // PLAY ROUND RESULTS
@@ -66,12 +81,6 @@ public class Round {
     public int returnGuessesLeft(int numOfGuesses){
         return maxGuesses - numOfGuesses;
     }
-
-    public String printGuessesLeft(int numOfGuesses){
-        return "\n" +
-                returnGuessesLeft(numOfGuesses) +
-                " Guesses left!" +
-                "\n \n";}
 
 
 

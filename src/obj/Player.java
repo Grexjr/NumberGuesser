@@ -12,7 +12,7 @@ public class Player {
     // Constructor for player
     public Player(){
         this.guessList = new ArrayList<>();
-        this.shortestGuesses = 0;
+        this.shortestGuesses = 10000;
         this.guessNumber = 0;
         this.roundsWon = 0;
     }
@@ -28,20 +28,41 @@ public class Player {
     public void setRoundsWon(int rounds){this.roundsWon = rounds;}
 
     // Other player methods
+    // === PLAYER HELPER METHODS ===
+
+    // Check if player exceeds certain guess limit (true exceeds or meets, false doesn't)
+    public boolean exceedsGuess(int guessNum){return this.guessNumber >= guessNum;}
+
+    // Win round methods
+    private int incrementWonRounds(){return this.roundsWon + 1;}
+    public void winRound(){this.setRoundsWon(incrementWonRounds());}
+
+
+    // === PLAYER STAT METHODS ===
+
+    // --- Player shortest guesses methods ---
+
+    // check if an integer is smaller than the shortest guess
+    private boolean isGuessQuicker(int guessNum){return guessNum < shortestGuesses;}
+
+    // save the lowest guess into shortestGuesses if it is quicker
+    private void saveLowestGuess(int guessNum){
+        if(isGuessQuicker(guessNum)){
+            this.shortestGuesses = guessNum;
+        }
+    }
+
+    // calculate the lowest guess
+    public void calculateLowestGuess(){saveLowestGuess(this.guessNumber);}
+
+    // === PLAYER ACTION METHODS ===
+
     // Guess number method
     public int guessNumber(){
         this.guessNumber++;
         Scanner kb = new Scanner(System.in);
         return kb.nextInt();
     }
-
-    // Check if player exceeds certain guess limit (true exceeds or meets, false doesn't)
-    public boolean exceedsGuess(int guessNum){return this.guessNumber >= guessNum;}
-
-    // Win round methods
-    public int incrementWonRounds(){return this.roundsWon + 1;}
-
-    public void winRound(){this.setRoundsWon(incrementWonRounds());}
 
     // Make choice methods
     public Choice detectChoice(int choiceSet){

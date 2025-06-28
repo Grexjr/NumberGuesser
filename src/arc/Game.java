@@ -47,17 +47,10 @@ public class Game {
     // Calculate game stats
 
     // Lowest guess methods
-    public int saveLowestGuess(){
-        int lowestGuess = 10000;
-        if(this.player.getGuessNumber() < lowestGuess){
-            lowestGuess = this.player.getGuessNumber();
-            return lowestGuess;
-        }
-        return this.player.getGuessNumber();
-    }
+
 
     //TODO: Need to make this happen after each round, NOT just when game ends
-    public void givePlayerLowestGuess(){this.player.setShortestGuesses(saveLowestGuess());}
+    //public void givePlayerLowestGuess(){this.player.setShortestGuesses(this.player.saveLowestGuess());}
 
     // Rounds won methods
     public void givePlayerRoundWon(){this.player.winRound();}
@@ -155,11 +148,10 @@ public class Game {
     //TODO: Refactor to make clearer, but general idea is game does loop of its stuff, round does loop of its stuff
     //TODO: Move things between here and round and create more methods for these invidiual raw implementations
     public void playGame(int roundNum) {
-        this.round = new Round(roundNum, this.maxGuesses, this.player);
         while (!this.gameOver) {
+            this.round = new Round(roundNum, this.maxGuesses, this.player);
             while (!this.round.checkLoss(this.player)){
                 this.round.playRound(this.player);
-                givePlayerLowestGuess();
                 if (this.round.checkLoss(this.player)) {
                     lose();
                     break;
