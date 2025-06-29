@@ -1,15 +1,18 @@
 package obj;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
 
-    // Variables for players
+
+    // === VARIABLES AND FIELDS ===
     private final ArrayList<Integer> guessList;
     private int shortestGuesses,guessNumber,roundsWon;
 
-    // Constructor for player
+
+    // === PLAYER CONSTRUCTOR ===
     public Player(){
         this.guessList = new ArrayList<>();
         this.shortestGuesses = 10000;
@@ -17,7 +20,8 @@ public class Player {
         this.roundsWon = 0;
     }
 
-    // Getters and Setters
+
+    // === GETTERS AND SETTERS ===
     public ArrayList<Integer> getGuessList() {return guessList;}
     public int getShortestGuesses() {return this.shortestGuesses;}
     public int getGuessNumber() {return this.guessNumber;}
@@ -27,7 +31,7 @@ public class Player {
     public void setGuessNumber(int guess){this.guessNumber = guess;}
     public void setRoundsWon(int rounds){this.roundsWon = rounds;}
 
-    // Other player methods
+
     // === PLAYER HELPER METHODS ===
 
     // Check if player exceeds certain guess limit (true exceeds or meets, false doesn't)
@@ -60,8 +64,21 @@ public class Player {
     // Guess number method
     public int guessNumber(){
         this.guessNumber++;
+        int guess = -1;
         Scanner kb = new Scanner(System.in);
-        return kb.nextInt();
+        // Loop that is always true and doesn't break until an integer is inputted
+        while(true) {
+            try {
+                guess = kb.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input!");
+                kb.next();
+            }
+        }
+        // Add the integer to the guessList array for the round
+        this.guessList.add(guess);
+        return guess;
     }
 
     // Make choice methods

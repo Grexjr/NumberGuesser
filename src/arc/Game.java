@@ -5,14 +5,15 @@ import obj.Player;
 
 public class Game {
 
-    // Variables for Game
+    // === GAME VARIABLES ===
     private Round round;
     private final Player player;
     private Difficulty gameDifficulty;
     private int maxGuesses;
     private boolean gameOver;
 
-    // Constructor for Game
+
+    // === GAME CONSTRUCTOR ===
     public Game(){
         // Ensure gameOver starts false
         this.gameOver = false;
@@ -31,7 +32,8 @@ public class Game {
         playGame(1);
     }
 
-    // Getter
+
+    // === GETTERS AND SETTERS ===
     public Round getRound() {return round;}
     public void setRound(Round round) {this.round = round;}
 
@@ -43,14 +45,10 @@ public class Game {
     public int getMaxGuesses() {return this.maxGuesses;}
     public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
 
-    // Other Game methods
-    // Calculate game stats
-
-    // Lowest guess methods
+    // === GAME HELPER METHODS ===
 
 
-    //TODO: Need to make this happen after each round, NOT just when game ends
-    //public void givePlayerLowestGuess(){this.player.setShortestGuesses(this.player.saveLowestGuess());}
+    // --- GAME STAT METHODS ---
 
     // Rounds won methods
     public void givePlayerRoundWon(){this.player.winRound();}
@@ -62,12 +60,15 @@ public class Game {
         //TODO: Make giving player lowest guess occur in round.java
     }
 
-    // Print methods
+
+    // === GAME PRINT METHODS ===
+
     // method to print opening
     public String printIntro(){
         return "Welcome to the number guessing game! \n\n";
     }
 
+    // method to print asking for difficulty
     public String askDifficulty(){
         return "What difficulty would you like? \n (type: easy, medium, hard, or impossible) \n";
     }
@@ -157,6 +158,7 @@ public class Game {
                     break;
                 }
                 if (round.getRoundOver()) {
+                    System.out.print(this.round.printGuessList(this.player));
                     int newRound = win(roundNum);
                     runContinueChoice(newRound);
                 } else {

@@ -4,7 +4,7 @@ import obj.Computer;
 import obj.Player;
 
 public class Round {
-    //TODO: Implement showing list of guesses when round is over
+
 
     // Variables required for round
     private final Computer computer;
@@ -19,6 +19,7 @@ public class Round {
 
         // Set up and print round method after initialization
         player.setGuessNumber(0);
+        player.getGuessList().clear();
         setUpRound(this.returnGuessesLeft(player.getGuessNumber()));
     }
 
@@ -43,8 +44,19 @@ public class Round {
     // method to check if player loses (true loses, false not)
     public boolean checkLoss(Player player){return player.exceedsGuess(this.getMaxGuesses());}
 
-    // -- ROUND STAT METHODS --
+    // calculate guesses left
+    public int returnGuessesLeft(int numOfGuesses){
+        return maxGuesses - numOfGuesses;
+    }
 
+    // -- ROUND STAT METHODS --
+    private String logicToPrintGuessList(Player player){
+        String listString = "\n";
+        for(int guess : player.getGuessList()){
+            listString = listString.concat(String.valueOf(guess)) + "\n";
+        }
+        return listString;
+    }
 
 
     // === PRINT ROUND METHODS ===
@@ -57,7 +69,15 @@ public class Round {
         return "\n" +
                 returnGuessesLeft(numOfGuesses) +
                 " Guesses left!" +
-                "\n \n";}
+                "\n \n";
+    }
+
+    // Print guess list
+    public String printGuessList(Player player){
+        return "You guessed: \n" +
+                logicToPrintGuessList(player) +
+                "\n";
+    }
 
     // === PLAY ROUNDS METHODS ===
 
@@ -75,11 +95,6 @@ public class Round {
     public String playRoundResults(int guess){
         if(computer.checkGuess(guess)){this.roundOver = true;}
         return this.computer.tellResult(guess);
-    }
-
-    // calculate guesses left
-    public int returnGuessesLeft(int numOfGuesses){
-        return maxGuesses - numOfGuesses;
     }
 
 
