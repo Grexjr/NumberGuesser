@@ -4,17 +4,29 @@ import java.util.Random;
 
 public class Computer {
 
-    // Variables for computers
+    // === VARIABLES AND FIELDS
     private final int secretNumber;
 
-    // Computer constructor
+
+    // === CONSTRUCTOR FOR COMPUTER ===
     public Computer(){this.secretNumber = new Random().nextInt(0,10000);}
 
-    // Computer methods
-    // Getter
+
+    // === GETTERS AND SETTERS ===
     public int getSecretNumber() {return secretNumber;}
 
-    // Other methods
+
+    // === COMPUTER HELPER METHODS ===
+
+    // Logic for checking if guess equals
+    public boolean checkGuess(int guess){return guess == this.secretNumber;}
+
+    // Logic for if guess is higher (true) or lower (false)
+    public boolean higherLower(int guess){return guess > this.secretNumber;}
+
+
+    // === COMPUTER PRINT METHODS ===
+
     // String to introduce self
     public String introduceSelf(int maxGuesses){
         return "Muahahahaha! \n" +
@@ -27,11 +39,6 @@ public class Computer {
     // String to ask for guess
     public String askForGuess(){return "What is your guess? \n";}
 
-    // Logic for checking if guess equals
-    public boolean checkGuess(int guess){return guess == this.secretNumber;}
-
-    // Logic for if guess is higher (true) or lower (false)
-    public boolean higherLower(int guess){return guess > this.secretNumber;}
 
     // String for result
     public String tellResult(int guess){
