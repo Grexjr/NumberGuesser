@@ -3,7 +3,9 @@ package obj;
 import java.util.ArrayList;
 
 public enum Choice {
-    //TODO: Add choiceSet as a param so you can just call on it
+
+
+    // === ENUM VALUES ===
 
     // Default choice value
     INVALID("Invalid"),
@@ -18,16 +20,23 @@ public enum Choice {
     YES("Yes"),
     NO("No");
 
-    // Variables required for choice
-    private String choiceLabel;
+    // === ENUM VARIABLES/FIELDS ===
 
-    // Constructor for choices
+    // Variables required for choice
+    private final String choiceLabel;
+
+
+    // == CHOICE CONSTRUCTOR ===
     Choice(String label){
         this.choiceLabel = label;
     }
 
-    // Getter
+
+    // === GETTERS AND SETTERS ===
     public String getChoiceLabel() {return this.choiceLabel;}
+
+
+    // === CHOICE HELPER METHODS
 
     // Static method to create possible choice set
     public static ArrayList<Choice> possibleChoices(int choiceSet){

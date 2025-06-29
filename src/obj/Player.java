@@ -27,7 +27,6 @@ public class Player {
     public int getGuessNumber() {return this.guessNumber;}
     public int getRoundsWon() {return this.roundsWon;}
 
-    public void setShortestGuesses(int guesses){this.shortestGuesses = guesses;}
     public void setGuessNumber(int guess){this.guessNumber = guess;}
     public void setRoundsWon(int rounds){this.roundsWon = rounds;}
 
@@ -58,6 +57,7 @@ public class Player {
 
     // calculate the lowest guess
     public void calculateLowestGuess(){saveLowestGuess(this.guessNumber);}
+
 
     // === PLAYER ACTION METHODS ===
 

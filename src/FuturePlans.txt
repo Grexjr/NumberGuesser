@@ -4,5 +4,8 @@ TODO ALWAYS: REFACTOR REFACTOR REFACTOR REFACTOR!!!
 
 1. Add stat calculations and stat printing at the end of the game to show shortest guessed round, number of rounds
 survived, and correct:incorrect guess ratio?
+--- DONE except for correct:incorrect guess ratio, which honestly won't be added or do much
 
 2. Add a hint system based on difficulty of hints that the player decides after difficulty, or tie it to difficulty.
+
+3. Add a GUI!

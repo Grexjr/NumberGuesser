@@ -34,19 +34,10 @@ public class Game {
 
 
     // === GETTERS AND SETTERS ===
-    public Round getRound() {return round;}
-    public void setRound(Round round) {this.round = round;}
-
-    public Player getPlayer() {return this.player;}
-
-    public Difficulty getGameDifficulty() {return this.gameDifficulty;}
-    public void setGameDifficulty(Difficulty difficulty) {this.gameDifficulty = difficulty;}
-
-    public int getMaxGuesses() {return this.maxGuesses;}
-    public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
+    // None, since game only ever accesses itself and nothing accesses it (until GUI is added)
 
     // === GAME HELPER METHODS ===
-
+    private boolean checkGameOver(){return this.gameOver;}
 
     // --- GAME STAT METHODS ---
 
@@ -146,10 +137,9 @@ public class Game {
     }
 
     // PLAY GAME METHOD
-    //TODO: Refactor to make clearer, but general idea is game does loop of its stuff, round does loop of its stuff
-    //TODO: Move things between here and round and create more methods for these invidiual raw implementations
+    //TODO: Refactor this method, if it needs it, for clarity and simplicity and ease of understanding
     public void playGame(int roundNum) {
-        while (!this.gameOver) {
+        while (!checkGameOver()) {
             this.round = new Round(roundNum, this.maxGuesses, this.player);
             while (!this.round.checkLoss(this.player)){
                 this.round.playRound(this.player);
@@ -157,7 +147,7 @@ public class Game {
                     lose();
                     break;
                 }
-                if (round.getRoundOver()) {
+                if (this.round.getRoundOver()) {
                     System.out.print(this.round.printGuessList(this.player));
                     int newRound = win(roundNum);
                     runContinueChoice(newRound);

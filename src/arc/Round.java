@@ -6,11 +6,14 @@ import obj.Player;
 public class Round {
 
 
-    // Variables required for round
+    // === VARIABLES AND FIELDS ===
+
     private final Computer computer;
-    private int roundNumber, maxGuesses, guessNumber;
+    private final int roundNumber, maxGuesses;
     private boolean roundOver;
 
+
+    // === CONSTRUCTOR FOR ROUND ===
     public Round(int roundNumber, int guesses, Player player){
         this.roundNumber = roundNumber;
         this.computer = new Computer();
@@ -23,15 +26,14 @@ public class Round {
         setUpRound(this.returnGuessesLeft(player.getGuessNumber()));
     }
 
-    // Getters and Setters
+
+    // === GETTERS AND SETTERS ===
+
     public Computer getComputer() {return computer;}
     public int getRoundNumber() {return roundNumber;}
     public int getMaxGuesses() {return this.maxGuesses;}
     public boolean getRoundOver() {return this.roundOver;}
 
-    public void setRoundNumber(int roundNumber) {this.roundNumber = roundNumber;}
-    public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
-    public void setRoundOver(boolean value) {this.roundOver = value;}
 
     // === ROUND HELPER METHODS ===
 
@@ -49,7 +51,9 @@ public class Round {
         return maxGuesses - numOfGuesses;
     }
 
-    // -- ROUND STAT METHODS --
+    // --- ROUND STAT METHODS ---
+
+    // Logic to print the guess list of the player; concat strings of guesses together
     private String logicToPrintGuessList(Player player){
         String listString = "\n";
         for(int guess : player.getGuessList()){
@@ -79,14 +83,15 @@ public class Round {
                 "\n";
     }
 
+
     // === PLAY ROUNDS METHODS ===
 
     // PLAY ROUND METHOD
     public void playRound(Player player){
-        while(!this.roundOver){
+        while(!getRoundOver()){
             System.out.print(this.computer.askForGuess());
             System.out.print(playRoundResults(player.guessNumber()));
-            if(!this.roundOver) {System.out.print(printGuessesLeft(player.getGuessNumber()));}
+            if(!getRoundOver()) {System.out.print(printGuessesLeft(player.getGuessNumber()));}
         }
         player.calculateLowestGuess();
     }
