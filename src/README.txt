@@ -9,8 +9,8 @@ the overall game. Challenge others to see who wins!
 
 See if you can find the strategy that always works, and see if you can use it to beat impossible mode. And have fun!
 
-Any questions/concerns/bug reports can be submitted however Github allows all that to be reported. Alternatively, you
-could e-mail the yet-to-be-created grexmakesgames@gmail.com.
+Any questions/concerns/bug reports can be submitted however Github allows all that to be reported. One day, I may have an
+email to use.
 
 Thanks!
 
