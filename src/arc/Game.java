@@ -8,8 +8,8 @@ public class Game {
     // === GAME VARIABLES ===
     private Round round;
     private final Player player;
-    private Difficulty gameDifficulty;
-    private int maxGuesses;
+    private final Difficulty gameDifficulty;
+    private final int maxGuesses;
     private boolean gameOver;
 
 
