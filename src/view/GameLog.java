@@ -28,8 +28,8 @@ public class GameLog extends JTextArea {
 
 
     // === BASIC METHODS ===
-    public void log(String message){
-        this.append(message);
+    public void log(PrintMessage message){
+        this.append(message.toString());
         SwingUtilities.invokeLater(this::scrollDown);
     }
 

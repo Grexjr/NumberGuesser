@@ -18,7 +18,9 @@ public class PrintMessage {
         // --- Round Printing ---
         ROUND,
         GUESSES_LEFT,
-        GUESS_LIST;
+        GUESS_LIST,
+
+        CUSTOM;
     }
 
     // === VARIABLES AND FIELDS ===
@@ -71,12 +73,26 @@ public class PrintMessage {
                     Arrays.toString(vars), // QUESTION: NOT SURE IF THIS WILL WORK OR NOT
                     "\n"
             };
+            default -> this.args = new String[]{
+                    vars[0]
+            };
         }
     }
 
 
     // === GETTERS ===
     public String[] getArgs() {return args;}
+
+
+    // === TO STRING ===
+    @Override
+    public String toString(){
+        return Arrays.toString(this.args)
+                .replace(",","")
+                .replace("[","")
+                .replace("]","")
+                .trim() + "\n";
+    }
 
 
 }

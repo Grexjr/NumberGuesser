@@ -30,7 +30,7 @@ public class GameView extends JPanel {
 
     // === DISPLAY METHODS ===
     public void displayInput(){
-        this.gameLog.log(this.inputViewer.getInputField().getText()+"\n");
+        this.gameLog.log(new PrintMessage(PrintMessage.Type.CUSTOM, inputViewer.getInputField().getText() +"\n"));
         this.inputViewer.getInputField().setText("");
     }
 
