@@ -24,17 +24,23 @@ public class Game {
         // Print the introduction
         System.out.println(printIntro());
 
-        // Print asking for difficulty
-        System.out.println(askDifficulty());
-        this.gameDifficulty = chooseDifficulty();
+        this.gameDifficulty = Difficulty.MEDIUM; // TEMP: Testing value
         this.maxGuesses = this.gameDifficulty.getMaxGuesses();
 
-        playGame(1);
+        //playGame(1);
     }
 
 
     // === GETTERS AND SETTERS ===
-    // None, since game only ever accesses itself and nothing accesses it (until GUI is added)
+    public Round getRound() {return round;}
+
+    public Player getPlayer() {return player;}
+
+    public Difficulty getGameDifficulty() {return gameDifficulty;}
+
+    public int getMaxGuesses() {return maxGuesses;}
+
+    public boolean isGameOver() {return gameOver;}
 
     // === GAME HELPER METHODS ===
     private boolean checkGameOver(){return this.gameOver;}
