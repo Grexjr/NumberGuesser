@@ -3,75 +3,47 @@ package view;
 import java.util.Arrays;
 
 public class PrintMessage {
-
-    // === ENUM FOR TYPE ===
-    public enum Type{
-        // --- Game Printing ---
-        INTRO,
-        DIFFICULTY_QUESTION,
-        LOSS,
-        WIN,
-        TRY_AGAIN,
-        CONTINUE_QUESTION,
-        GAME_END,
-
-        // --- Round Printing ---
-        ROUND,
-        GUESSES_LEFT,
-        GUESS_LIST,
-
-        CUSTOM;
-    }
+    // QUESTION: Should I make these all one big array and choose from there?
+    // QUESTION: Or should I turn these into enums and just call their string components? Put these into type enum?
+    // === CONSTANTS ===
 
     // === VARIABLES AND FIELDS ===
-    private String[] args;
+    private final String[] args;
 
 
     // === CONSTRUCTOR
-    public PrintMessage(Type type, String... vars){ //TODO: Condense these, add a CUSTOM type for no vars args
+    public PrintMessage(PrintMessageType type, String... vars){
         switch(type){
             case INTRO -> this.args = new String[]{
-                    "Muahahahaha!\nI am an evil computer. Guess my number or perish!\nYou have ",
+                    type.getStrings()[0],
                     vars[0],
-                    "guesses! \n"};
-            case DIFFICULTY_QUESTION -> this.args = new String[]{
-                    "What difficulty would you like?\n (type: easy, medium, hard, or impossible)\n"
-            };
+                    type.getStrings()[1]};
             case LOSS -> this.args = new String[]{
-                    "You Lose! Muahahaha! No more games for you!\n\nThe number was ",
+                    type.getStrings()[3],
                     vars[0],
-                    "\n"
-            };
-            case WIN -> this.args = new String[]{
-                    "You win!\n"
-            };
-            case TRY_AGAIN -> this.args = new String[]{
-                    "Try again!\n\n"
-            };
-            case CONTINUE_QUESTION -> this.args = new String[]{
-                    "Continue game?\n(type yes or no)\n"
+                    type.getStrings()[0]
             };
             case GAME_END -> this.args = new String[]{
-                    "Game is over!\nStats:\nRounds won: ",
+                    type.getStrings()[4],
                     vars[0],
-                    "\n",
-                    "Your record for shortest guesses is: ",
+                    type.getStrings()[0],
+                    type.getStrings()[5],
                     vars[1],
-                    "\n\n Ending game..."
+                    type.getStrings()[6]
             };
             case ROUND -> this.args = new String[]{
-                    "Round: ",
+                    type.getStrings()[7],
                     vars[0]
             };
             case GUESSES_LEFT -> this.args = new String[]{
-                    "\n",
+                    type.getStrings()[0],
                     vars[0],
-                    " guesses left!\n\n"
+                    type.getStrings()[8]
             };
             case GUESS_LIST -> this.args = new String[]{
-                    "You guessed:\n",
+                    type.getStrings()[9],
                     Arrays.toString(vars), // QUESTION: NOT SURE IF THIS WILL WORK OR NOT
-                    "\n"
+                    type.getStrings()[0]
             };
             default -> this.args = new String[]{
                     vars[0]

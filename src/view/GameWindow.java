@@ -11,6 +11,7 @@ public class GameWindow {
 
     // === VARIABLES AND FIELDS ===
     private final JFrame gameFrame;
+    private final GameView view;
 
 
     // === CONSTRUCTOR ===
@@ -21,7 +22,7 @@ public class GameWindow {
         this.gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.gameFrame.setLocationRelativeTo(null);
 
-        GameView view = new GameView();
+        this.view = new GameView();
         this.gameFrame.add(view);
 
         this.gameFrame.setVisible(true);
@@ -33,6 +34,7 @@ public class GameWindow {
     // === GETTERS ===
     public JFrame getFrame() {return this.gameFrame;}
 
+    public GameView getView() {return view;}
 
     // === BASIC METHODS ===
     public void clear(){
