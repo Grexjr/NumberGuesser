@@ -4,9 +4,25 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends JPanel {
+    // === CONSTANTS === | TODO: figure out if these should be moved or what | also public only for testing
+    private static final String[] GAME_QUESTIONS = new String[]{
+            // Difficulty Q (0)
+            "What difficulty would you like?\n (type: easy, medium, hard, or impossible)\n",
+
+            // Continue Q (1)
+            "Continue game?\n(type yes or no)\n"
+    };
+
+    private static final String[] GAME_DECLARATIONS = new String[]{
+            // Win declaration (0)
+            "You win!\n",
+
+            // Try again declaration (1)
+            "Try again!\n\n"
+    };
 
     // === VARIABLES AND FIELDS ===
-    private final JTextArea gameLog;
+    private final GameLog gameLog;
     private final InputView inputViewer;
 
 
@@ -16,9 +32,7 @@ public class GameView extends JPanel {
 
         this.inputViewer = new InputView();
 
-        // this.setLayout(new BorderLayout()); TODO: Decide if you want this kind of format
-
-        this.add(this.gameLog, BorderLayout.CENTER);
+        this.add(this.gameLog.getScroller(), BorderLayout.CENTER);
         this.add(this.inputViewer, BorderLayout.SOUTH);
 
         this.addInputAction();
@@ -26,13 +40,15 @@ public class GameView extends JPanel {
 
 
     // === GETTERS ===
-    public JTextArea getGameLog() {return gameLog;}
+    public GameLog getGameLog() {return gameLog;}
 
     public InputView getInputViewer() {return inputViewer;}
 
     // === DISPLAY METHODS ===
     public void displayInput(){
-        this.gameLog.append(this.inputViewer.getInputField().getText());
+        this.gameLog.log(
+                new PrintMessage(PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
+        );
         this.inputViewer.getInputField().setText("");
     }
 
@@ -43,14 +59,15 @@ public class GameView extends JPanel {
 
 
     // === BASIC METHODS ===
-    public void refresh(){
-        this.revalidate();
-        this.repaint();
-    }
-
+    // === BASIC METHODS ===
     public void clear(){
         this.removeAll();
         this.refresh();
+    }
+
+    public void refresh(){
+        this.revalidate();
+        this.repaint();
     }
 
 

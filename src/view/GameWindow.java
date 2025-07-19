@@ -11,6 +11,7 @@ public class GameWindow {
 
     // === VARIABLES AND FIELDS ===
     private final JFrame gameFrame;
+    private final GameView view;
 
 
     // === CONSTRUCTOR ===
@@ -21,14 +22,30 @@ public class GameWindow {
         this.gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.gameFrame.setLocationRelativeTo(null);
 
-        this.gameFrame.add(new GameView());
+        this.view = new GameView();
+        this.gameFrame.add(view);
 
         this.gameFrame.setVisible(true);
+
+        view.getInputViewer().getInputField().requestFocusInWindow(); //TODO: Figure out if you need this when hidden
     }
 
 
     // === GETTERS ===
     public JFrame getFrame() {return this.gameFrame;}
+
+    public GameView getView() {return view;}
+
+    // === BASIC METHODS ===
+    public void clear(){
+        this.gameFrame.getContentPane().removeAll();
+        this.refresh();
+    }
+
+    public void refresh(){
+        this.gameFrame.getContentPane().revalidate();
+        this.gameFrame.getContentPane().repaint();
+    }
 
 
 }
