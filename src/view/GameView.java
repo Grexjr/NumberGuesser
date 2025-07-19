@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends JPanel {
-    // === CONSTANTS ===
-    private static final int LOG_ROWS = 30;
-    private static final int LOG_COLUMNS = 45;
 
     // === VARIABLES AND FIELDS ===
     private final JTextArea gameLog;
@@ -15,12 +12,8 @@ public class GameView extends JPanel {
 
     // === CONSTRUCTOR ===
     public GameView(){
-        this.gameLog = new JTextArea(LOG_ROWS,LOG_COLUMNS);
-        this.gameLog.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        this.gameLog.setEditable(false);
-        this.gameLog.setLineWrap(true);
-        this.gameLog.setWrapStyleWord(true);
-        // TODO: Method to scroll to bottom
+        this.gameLog = new GameLog();
+
         this.inputViewer = new InputView();
 
         // this.setLayout(new BorderLayout()); TODO: Decide if you want this kind of format
