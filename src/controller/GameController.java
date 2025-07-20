@@ -1,5 +1,6 @@
 package controller;
 
+import arc.Difficulty;
 import arc.Game;
 import view.GameLog;
 import view.GameWindow;
@@ -25,7 +26,10 @@ public class GameController {
         log.log(data);
     }
 
-    public void setDifficulty(){}
+    public void setDifficulty(Difficulty choice){
+        this.gameState.setGameDifficulty(choice);
+        this.gameState.setMaxGuesses(choice.getMaxGuesses());
+    }
 
 
     // === RUN GAME METHOD ===

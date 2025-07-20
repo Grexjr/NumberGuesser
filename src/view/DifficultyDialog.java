@@ -47,6 +47,9 @@ public class DifficultyDialog extends JDialog {
     }
 
 
+    // === GETTER ===
+    public Difficulty getDifficultyChoice() {return difficultyChoice;}
+
     // === BUTTON!!! ===
     private ArrayList<JButton> createDifficultyButtons(){
         JButton easy = new JButton("Easy");

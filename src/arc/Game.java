@@ -8,8 +8,8 @@ public class Game {
     // === GAME VARIABLES ===
     private Round round;
     private final Player player;
-    private final Difficulty gameDifficulty;
-    private final int maxGuesses;
+    private Difficulty gameDifficulty;
+    private int maxGuesses;
     private boolean gameOver;
 
 
@@ -24,9 +24,6 @@ public class Game {
         // Print the introduction
         System.out.println(printIntro());
 
-        this.gameDifficulty = Difficulty.MEDIUM; // TEMP: Testing value
-        this.maxGuesses = this.gameDifficulty.getMaxGuesses();
-
         //playGame(1);
     }
 
@@ -37,8 +34,10 @@ public class Game {
     public Player getPlayer() {return player;}
 
     public Difficulty getGameDifficulty() {return gameDifficulty;}
+    public void setGameDifficulty(Difficulty difficulty) {this.gameDifficulty = difficulty;}
 
     public int getMaxGuesses() {return maxGuesses;}
+    public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
 
     public boolean isGameOver() {return gameOver;}
 
@@ -102,18 +101,6 @@ public class Game {
 
     // Helper methods
     // Method for changing the difficulty
-    public Difficulty chooseDifficulty(){
-        return switch (this.player.detectChoice(1)) {
-            case Choice.EASY -> Difficulty.EASY;
-            case Choice.MEDIUM -> Difficulty.MEDIUM;
-            case Choice.HARD -> Difficulty.HARD;
-            case Choice.IMPOSSIBLE -> Difficulty.IMPOSSIBLE;
-            default -> {
-                System.out.print("INVALID CHOICE! Setting to impossible...\n");
-                yield Difficulty.IMPOSSIBLE;
-            }
-        };
-    }
 
     // Method for continue or not choice
     private void runContinueChoice(int roundNum){
