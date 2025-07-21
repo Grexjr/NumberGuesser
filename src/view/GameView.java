@@ -4,24 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameView extends JPanel {
-    // === CONSTANTS === | TODO: figure out if these should be moved or what | also public only for testing
-    private static final String[] GAME_QUESTIONS = new String[]{
-            // Difficulty Q (0)
-            "What difficulty would you like?\n (type: easy, medium, hard, or impossible)\n",
+    // === CONSTANTS === | TODO: move these to controller class and make protected
 
-            // Continue Q (1)
-            "Continue game?\n(type yes or no)\n"
-    };
-
-    private static final String[] GAME_DECLARATIONS = new String[]{
-            // Win declaration (0)
-            "You win!\n",
-
-            // Try again declaration (1)
-            "Try again!\n\n"
-    };
-
-    // === VARIABLES AND FIELDS ===
+    // === VARIABLES AND FIELDS === | TODO: Input field only visible when player needs to input
     private final GameLog gameLog;
     private final InputView inputViewer;
 

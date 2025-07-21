@@ -16,7 +16,7 @@ public class tester {
         GameController controller = new GameController(gameState,window);
         controller.setDifficulty(dialog.getDifficultyChoice());
 
-        controller.runGame(player);
+        controller.runRound(1,player);
 
 
 

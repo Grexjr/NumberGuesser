@@ -9,6 +9,8 @@ import view.GameWindow;
 import view.PrintMessage;
 import view.PrintMessageType;
 
+import static controller.Strings.GAME_DECLARATIONS;
+
 public class GameController {
 
     // === VARIABLES AND FIELDS === | QUESTION: Maybe should go in constructor since not ever accessed by other stuff
@@ -40,9 +42,10 @@ public class GameController {
 
 
     // === RUN GAME METHOD === // QUESTION: rename to run round?
-    public void runGame(Player player){ // TODO: Eventually have a dialog box before you enter for difficulty choice
+    public void runRound(int roundNum, Player player){ // TODO: Eventually have a dialog box before you enter for difficulty choice
+        // TODO: set a new isGuessed boolean to false
         // STEP 1: start round and print it
-        createNewRound(1,player);
+        createNewRound(roundNum,player);
         this.printData(
                 new PrintMessage(
                         PrintMessageType.ROUND,
@@ -57,7 +60,17 @@ public class GameController {
                 ));
 
         // STEP 3: play the round
+        // - STEP 3a: computer ask for guess | TODO: Add a wait method
+        this.printData(
+                new PrintMessage(
+                        PrintMessageType.CUSTOM,
+                        GAME_DECLARATIONS[2]
+                ));
 
+        // - STEP 3b: allow player to input guess
+        this.gameState.getPlayer().guessNumber();
+        //TODO: add to the input field KeyListener for enter key, when pressed sets the isGuessed boolean to true,
+        // if true, runs the rest of the round
     }
 
 
