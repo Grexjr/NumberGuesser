@@ -37,6 +37,11 @@ public class GameWindow {
     public GameView getView() {return view;}
 
     // === BASIC METHODS ===
+    public void add(JComponent component){
+        this.gameFrame.getContentPane().add(component);
+    }
+
+
     public void clear(){
         this.gameFrame.getContentPane().removeAll();
         this.refresh();

@@ -8,8 +8,8 @@ public class Game {
     // === GAME VARIABLES ===
     private Round round;
     private final Player player;
-    private final Difficulty gameDifficulty;
-    private final int maxGuesses;
+    private Difficulty gameDifficulty;
+    private int maxGuesses;
     private boolean gameOver;
 
 
@@ -24,17 +24,22 @@ public class Game {
         // Print the introduction
         System.out.println(printIntro());
 
-        // Print asking for difficulty
-        System.out.println(askDifficulty());
-        this.gameDifficulty = chooseDifficulty();
-        this.maxGuesses = this.gameDifficulty.getMaxGuesses();
-
-        playGame(1);
+        //playGame(1);
     }
 
 
     // === GETTERS AND SETTERS ===
-    // None, since game only ever accesses itself and nothing accesses it (until GUI is added)
+    public Round getRound() {return round;}
+
+    public Player getPlayer() {return player;}
+
+    public Difficulty getGameDifficulty() {return gameDifficulty;}
+    public void setGameDifficulty(Difficulty difficulty) {this.gameDifficulty = difficulty;}
+
+    public int getMaxGuesses() {return maxGuesses;}
+    public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
+
+    public boolean isGameOver() {return gameOver;}
 
     // === GAME HELPER METHODS ===
     private boolean checkGameOver(){return this.gameOver;}
@@ -96,18 +101,6 @@ public class Game {
 
     // Helper methods
     // Method for changing the difficulty
-    public Difficulty chooseDifficulty(){
-        return switch (this.player.detectChoice(1)) {
-            case Choice.EASY -> Difficulty.EASY;
-            case Choice.MEDIUM -> Difficulty.MEDIUM;
-            case Choice.HARD -> Difficulty.HARD;
-            case Choice.IMPOSSIBLE -> Difficulty.IMPOSSIBLE;
-            default -> {
-                System.out.print("INVALID CHOICE! Setting to impossible...\n");
-                yield Difficulty.IMPOSSIBLE;
-            }
-        };
-    }
 
     // Method for continue or not choice
     private void runContinueChoice(int roundNum){

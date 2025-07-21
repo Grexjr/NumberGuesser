@@ -1,5 +1,6 @@
 package controller;
 
+import arc.Difficulty;
 import arc.Game;
 import view.GameLog;
 import view.GameWindow;
@@ -25,12 +26,22 @@ public class GameController {
         log.log(data);
     }
 
+    public void setDifficulty(Difficulty choice){
+        this.gameState.setGameDifficulty(choice);
+        this.gameState.setMaxGuesses(choice.getMaxGuesses());
+    }
+
 
     // === RUN GAME METHOD ===
     public void runGame(){ // TODO: Eventually have a dialog box before you enter for difficulty choice
         // STEP 1: start round
 
         // STEP 2: print the introduction of the round
+        this.printData(
+                new PrintMessage(
+                        PrintMessageType.INTRO,
+                        Integer.toString(this.gameState.getGameDifficulty().getMaxGuesses())
+                ));
 
         // STEP 3: play the round
     }
