@@ -45,28 +45,27 @@ public class GameController {
     }
 
     // === INPUT METHODS ===
-    public void displayInput(){
+    public void displayInput(){ // TODO: Rename this method because it does more
         try{
             this.gameState.getPlayer().setCurrentGuess(
                     Integer.parseInt(this.gameGUI.getView().getInputViewer().getInputField().getText()));
             this.gameGUI.getView().logInput(true);
 
+            // run the rest of the round here
+            runPlayerGuess(); // TODO: make this return in gameState and display here based on enum
         } catch(NumberFormatException e) {
             this.gameGUI.getView().logInput(false);
         }
     }
 
     public void addInputAction(){
-        this.gameGUI.getView().getInputViewer().getInputField().addActionListener(_ -> displayInput());
+        this.gameGUI.getView().getInputViewer().getInputField().addActionListener(_ -> {
+                displayInput();
+        });
     }
 
 
     // === RUN GAME METHODS ===
-    public void readPlayerGuess(){
-        Player player = this.gameState.getPlayer();
-        player.setCurrentGuess(this.gameGUI.getView().getInputtedGuess());
-    }
-
     public void runPlayerGuess() { //TODO: make this return an enum for win, higher, lower
         Player player = this.gameState.getPlayer();
         Computer computer = this.gameState.getRound().getComputer();
@@ -82,7 +81,8 @@ public class GameController {
                                 PrintMessageType.CUSTOM,
                                 GAME_DECLARATIONS[6]
                         ));
-            } else if(player.getCurrentGuess() < computer.getSecretNumber()){
+            }
+            if(player.getCurrentGuess() < computer.getSecretNumber()){
                 this.printData(
                         new PrintMessage(
                                 PrintMessageType.CUSTOM,
