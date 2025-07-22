@@ -30,6 +30,7 @@ public class Game {
 
     // === GETTERS AND SETTERS ===
     public Round getRound() {return round;}
+    public void setRound(Round nextRound) {this.round = nextRound;}
 
     public Player getPlayer() {return player;}
 

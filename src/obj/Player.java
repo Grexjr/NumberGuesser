@@ -9,7 +9,7 @@ public class Player {
 
     // === VARIABLES AND FIELDS ===
     private final ArrayList<Integer> guessList;
-    private int shortestGuesses,guessNumber,roundsWon;
+    private int shortestGuesses,guessNumber,roundsWon,currentGuess;
 
 
     // === PLAYER CONSTRUCTOR ===
@@ -18,6 +18,7 @@ public class Player {
         this.shortestGuesses = 10000;
         this.guessNumber = 0;
         this.roundsWon = 0;
+        this.currentGuess = -1;
     }
 
 
@@ -26,9 +27,11 @@ public class Player {
     public int getShortestGuesses() {return this.shortestGuesses;}
     public int getGuessNumber() {return this.guessNumber;}
     public int getRoundsWon() {return this.roundsWon;}
+    public int getCurrentGuess() {return currentGuess;}
 
     public void setGuessNumber(int guess){this.guessNumber = guess;}
     public void setRoundsWon(int rounds){this.roundsWon = rounds;}
+    public void setCurrentGuess(int guess){this.currentGuess = guess;}
 
 
     // === PLAYER HELPER METHODS ===
@@ -65,15 +68,15 @@ public class Player {
     public int guessNumber(){
         this.guessNumber++;
         int guess = -1;
-        Scanner kb = new Scanner(System.in);
+        //Scanner kb = new Scanner(System.in);
         // Loop that is always true and doesn't break until an integer is inputted
         while(true) {
             try {
-                guess = kb.nextInt();
+                //guess = kb.nextInt();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
-                kb.next();
+                //kb.next();
             }
         }
         // Add the integer to the guessList array for the round
