@@ -11,6 +11,7 @@ import view.PrintMessage;
 import view.PrintMessageType;
 
 import static controller.Strings.GAME_DECLARATIONS;
+import static controller.Strings.SYSTEM_DECLARATIONS;
 
 public class GameController {
 
@@ -22,6 +23,8 @@ public class GameController {
     public GameController(Game state, GameWindow gui){
         this.gameState = state;
         this.gameGUI = gui;
+
+        this.addInputAction();
     }
 
 
@@ -39,6 +42,22 @@ public class GameController {
     public void createNewRound(int roundNum, Player player){
         Round newRound = new Round(roundNum, this.gameState.getMaxGuesses(), player);
         this.gameState.setRound(newRound);
+    }
+
+    // === INPUT METHODS ===
+    public void displayInput(){
+        try{
+            this.gameState.getPlayer().setCurrentGuess(
+                    Integer.parseInt(this.gameGUI.getView().getInputViewer().getInputField().getText()));
+            this.gameGUI.getView().logInput(true);
+
+        } catch(NumberFormatException e) {
+            this.gameGUI.getView().logInput(false);
+        }
+    }
+
+    public void addInputAction(){
+        this.gameGUI.getView().getInputViewer().getInputField().addActionListener(_ -> displayInput());
     }
 
 

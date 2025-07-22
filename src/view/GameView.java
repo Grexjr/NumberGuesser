@@ -26,8 +26,6 @@ public class GameView extends JPanel {
 
         this.add(this.gameLog.getScroller(), BorderLayout.CENTER);
         this.add(this.inputViewer, BorderLayout.SOUTH);
-
-        this.addInputAction();
     }
 
 
@@ -41,30 +39,19 @@ public class GameView extends JPanel {
     public boolean getGuessDone() {return isGuessDone;}
 
     // === DISPLAY METHODS ===
-    public void displayInput(){
-        try{
-            this.inputtedGuess = Integer.parseInt(inputViewer.getInputField().getText());
+    public void logInput(boolean successOrFail){
+        if(successOrFail){
             this.gameLog.log(
-                    new PrintMessage(
-                            PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
-            );
-            this.inputViewer.getInputField().setText("");
-            this.isGuessDone = true;
-        } catch(NumberFormatException e) {
+                new PrintMessage(
+                        PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
+        );
+        } else {
             this.gameLog.log(
                     new PrintMessage(PrintMessageType.CUSTOM,SYSTEM_DECLARATIONS[0])
             );
-            this.inputViewer.getInputField().setText("");
         }
+        this.inputViewer.getInputField().setText("");
     }
-
-
-
-    // === HELPER METHODS ===
-    public void addInputAction(){
-        this.inputViewer.getInputField().addActionListener(_ -> displayInput());
-    }
-
 
     // === BASIC METHODS ===
     // === BASIC METHODS ===
