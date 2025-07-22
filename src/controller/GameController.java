@@ -41,9 +41,22 @@ public class GameController {
     }
 
 
-    // === RUN GAME METHOD === // QUESTION: rename to run round?
+    // === RUN GAME METHODS ===
+
+
+    public void makePlayerGuess(){
+        if(!this.gameGUI.getView().getGuessDone()){
+
+        }
+    }
+
+
+
     public void runRound(int roundNum, Player player){ // TODO: Eventually have a dialog box before you enter for difficulty choice
-        // TODO: set a new isGuessed boolean to false
+        // INITIALIZE:
+        // STEP 0: set the guess ready boolean to false for the gameGUI
+        this.gameGUI.getView().setGuessDone(false);
+
         // STEP 1: start round and print it
         createNewRound(roundNum,player);
         this.printData(
@@ -68,9 +81,10 @@ public class GameController {
                 ));
 
         // - STEP 3b: allow player to input guess
-        this.gameState.getPlayer().guessNumber();
-        //TODO: add to the input field KeyListener for enter key, when pressed sets the isGuessed boolean to true,
-        // if true, runs the rest of the round
+
+
+
+
     }
 
 

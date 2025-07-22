@@ -65,15 +65,15 @@ public class Player {
     public int guessNumber(){
         this.guessNumber++;
         int guess = -1;
-        Scanner kb = new Scanner(System.in);
+        //Scanner kb = new Scanner(System.in);
         // Loop that is always true and doesn't break until an integer is inputted
         while(true) {
             try {
-                guess = kb.nextInt();
+                //guess = kb.nextInt();
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input!");
-                kb.next();
+                //kb.next();
             }
         }
         // Add the integer to the guessList array for the round

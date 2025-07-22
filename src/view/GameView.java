@@ -9,6 +9,7 @@ public class GameView extends JPanel {
     // === VARIABLES AND FIELDS === | TODO: Input field only visible when player needs to input
     private final GameLog gameLog;
     private final InputView inputViewer;
+    private boolean guessDoneGUI;
 
 
     // === CONSTRUCTOR ===
@@ -16,6 +17,8 @@ public class GameView extends JPanel {
         this.gameLog = new GameLog();
 
         this.inputViewer = new InputView();
+
+        this.guessDoneGUI = false;
 
         this.add(this.gameLog.getScroller(), BorderLayout.CENTER);
         this.add(this.inputViewer, BorderLayout.SOUTH);
@@ -29,17 +32,33 @@ public class GameView extends JPanel {
 
     public InputView getInputViewer() {return inputViewer;}
 
+    public boolean getGuessDone() {return guessDoneGUI;}
+    public void setGuessDone(boolean val) {this.guessDoneGUI = val;}
+
     // === DISPLAY METHODS ===
     public void displayInput(){
-        this.gameLog.log(
-                new PrintMessage(PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
-        );
-        this.inputViewer.getInputField().setText("");
+        try{
+            Integer.parseInt(inputViewer.getInputField().getText());
+            this.gameLog.log(
+                    new PrintMessage(
+                            PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
+            );
+            this.inputViewer.getInputField().setText("");
+        } catch(NumberFormatException e) {
+            this.gameLog.log(
+                    new PrintMessage(PrintMessageType.CUSTOM,"INVALID INPUT!") // TEMP: Make this a declaration
+            );
+            this.inputViewer.getInputField().setText("");
+        }
     }
 
     // === HELPER METHODS ===
     public void addInputAction(){
-        this.inputViewer.getInputField().addActionListener(_ -> displayInput());
+        this.inputViewer.getInputField().addActionListener(_ -> {
+            displayInput();
+            this.guessDoneGUI = true;
+        }
+        );
     }
 
 
