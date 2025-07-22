@@ -3,6 +3,7 @@ package controller;
 import arc.Difficulty;
 import arc.Game;
 import arc.Round;
+import obj.Computer;
 import obj.Player;
 import view.GameLog;
 import view.GameWindow;
@@ -42,21 +43,45 @@ public class GameController {
 
 
     // === RUN GAME METHODS ===
+    public void readPlayerGuess(){
+        Player player = this.gameState.getPlayer();
+        player.setCurrentGuess(this.gameGUI.getView().getInputtedGuess());
+    }
 
-
-    public void makePlayerGuess(){
-        if(!this.gameGUI.getView().getGuessDone()){
-
+    public void runPlayerGuess() { //TODO: make this return an enum for win, higher, lower
+        Player player = this.gameState.getPlayer();
+        Computer computer = this.gameState.getRound().getComputer();
+        if(player.getCurrentGuess() != computer.getSecretNumber()){
+            this.printData(
+                    new PrintMessage(
+                            PrintMessageType.CUSTOM,
+                            GAME_DECLARATIONS[5]
+                    ));
+            if(player.getCurrentGuess() > computer.getSecretNumber()){
+                this.printData(
+                        new PrintMessage(
+                                PrintMessageType.CUSTOM,
+                                GAME_DECLARATIONS[6]
+                        ));
+            } else if(player.getCurrentGuess() < computer.getSecretNumber()){
+                this.printData(
+                        new PrintMessage(
+                                PrintMessageType.CUSTOM,
+                                GAME_DECLARATIONS[7]
+                        ));
+            }
+        } else {
+            this.printData(
+                    new PrintMessage(
+                            PrintMessageType.CUSTOM,
+                            GAME_DECLARATIONS[3],
+                            GAME_DECLARATIONS[4]
+                    ));
         }
     }
 
 
-
     public void runRound(int roundNum, Player player){ // TODO: Eventually have a dialog box before you enter for difficulty choice
-        // INITIALIZE:
-        // STEP 0: set the guess ready boolean to false for the gameGUI
-        this.gameGUI.getView().setGuessDone(false);
-
         // STEP 1: start round and print it
         createNewRound(roundNum,player);
         this.printData(
@@ -81,8 +106,6 @@ public class GameController {
                 ));
 
         // - STEP 3b: allow player to input guess
-
-
 
 
     }

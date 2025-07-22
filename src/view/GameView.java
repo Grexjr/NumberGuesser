@@ -3,13 +3,16 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+import static controller.Strings.SYSTEM_DECLARATIONS;
+
 public class GameView extends JPanel {
-    // === CONSTANTS === | TODO: move these to controller class and make protected
+    // === CONSTANTS ===
 
     // === VARIABLES AND FIELDS === | TODO: Input field only visible when player needs to input
     private final GameLog gameLog;
     private final InputView inputViewer;
-    private boolean guessDoneGUI;
+    private int inputtedGuess;
+    private boolean isGuessDone;
 
 
     // === CONSTRUCTOR ===
@@ -18,7 +21,8 @@ public class GameView extends JPanel {
 
         this.inputViewer = new InputView();
 
-        this.guessDoneGUI = false;
+        this.inputtedGuess = -1;
+        this.isGuessDone = false;
 
         this.add(this.gameLog.getScroller(), BorderLayout.CENTER);
         this.add(this.inputViewer, BorderLayout.SOUTH);
@@ -32,33 +36,33 @@ public class GameView extends JPanel {
 
     public InputView getInputViewer() {return inputViewer;}
 
-    public boolean getGuessDone() {return guessDoneGUI;}
-    public void setGuessDone(boolean val) {this.guessDoneGUI = val;}
+    public int getInputtedGuess() {return inputtedGuess;}
+
+    public boolean getGuessDone() {return isGuessDone;}
 
     // === DISPLAY METHODS ===
     public void displayInput(){
         try{
-            Integer.parseInt(inputViewer.getInputField().getText());
+            this.inputtedGuess = Integer.parseInt(inputViewer.getInputField().getText());
             this.gameLog.log(
                     new PrintMessage(
                             PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
             );
             this.inputViewer.getInputField().setText("");
+            this.isGuessDone = true;
         } catch(NumberFormatException e) {
             this.gameLog.log(
-                    new PrintMessage(PrintMessageType.CUSTOM,"INVALID INPUT!") // TEMP: Make this a declaration
+                    new PrintMessage(PrintMessageType.CUSTOM,SYSTEM_DECLARATIONS[0])
             );
             this.inputViewer.getInputField().setText("");
         }
     }
 
+
+
     // === HELPER METHODS ===
     public void addInputAction(){
-        this.inputViewer.getInputField().addActionListener(_ -> {
-            displayInput();
-            this.guessDoneGUI = true;
-        }
-        );
+        this.inputViewer.getInputField().addActionListener(_ -> displayInput());
     }
 
 
