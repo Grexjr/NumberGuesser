@@ -53,6 +53,11 @@ public class GameController {
 
             // run the rest of the round here
             runPlayerGuess(); // TODO: make this return in gameState and display here based on enum
+
+            // end the round
+
+
+
         } catch(NumberFormatException e) {
             this.gameGUI.getView().logInput(false);
         }
@@ -75,6 +80,7 @@ public class GameController {
                             PrintMessageType.CUSTOM,
                             GAME_DECLARATIONS[5]
                     ));
+            // set a boolean in game state here about the round?
             if(player.getCurrentGuess() > computer.getSecretNumber()){
                 this.printData(
                         new PrintMessage(
