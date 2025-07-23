@@ -65,23 +65,10 @@ public class Player {
     // === PLAYER ACTION METHODS ===
 
     // Guess number method
-    public int guessNumber(){
+    public void guessNumber(int guess){
         this.guessNumber++;
-        int guess = -1;
-        //Scanner kb = new Scanner(System.in);
-        // Loop that is always true and doesn't break until an integer is inputted
-        while(true) {
-            try {
-                //guess = kb.nextInt();
-                break;
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input!");
-                //kb.next();
-            }
-        }
-        // Add the integer to the guessList array for the round
-        this.guessList.add(guess);
-        return guess;
+        this.currentGuess = guess;
+        this.guessList.add(currentGuess);
     }
 
     // Make choice methods

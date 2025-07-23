@@ -2,6 +2,7 @@ package controller;
 
 import arc.Difficulty;
 import arc.Game;
+import arc.GuessResult;
 import arc.Round;
 import obj.Computer;
 import obj.Player;
@@ -10,8 +11,7 @@ import view.GameWindow;
 import view.PrintMessage;
 import view.PrintMessageType;
 
-import static controller.Strings.GAME_DECLARATIONS;
-import static controller.Strings.SYSTEM_DECLARATIONS;
+import static controller.Strings.*;
 
 public class GameController {
 
@@ -47,15 +47,13 @@ public class GameController {
     // === INPUT METHODS ===
     public void displayInput(){ // TODO: Rename this method because it does more
         try{
-            this.gameState.getPlayer().setCurrentGuess(
-                    Integer.parseInt(this.gameGUI.getView().getInputViewer().getInputField().getText()));
+            int guess = Integer.parseInt(this.gameGUI.getView().getInputViewer().getInputField().getText());
             this.gameGUI.getView().logInput(true);
 
             // run the rest of the round here
-            runPlayerGuess(); // TODO: make this return in gameState and display here based on enum
+            runPlayerGuess(guess);
 
-            // end the round
-
+            // end the round in the above method
 
 
         } catch(NumberFormatException e) {
@@ -71,42 +69,42 @@ public class GameController {
 
 
     // === RUN GAME METHODS ===
-    public void runPlayerGuess() { //TODO: make this return an enum for win, higher, lower
-        Player player = this.gameState.getPlayer();
-        Computer computer = this.gameState.getRound().getComputer();
-        if(player.getCurrentGuess() != computer.getSecretNumber()){
-            this.printData(
-                    new PrintMessage(
-                            PrintMessageType.CUSTOM,
-                            GAME_DECLARATIONS[5]
-                    ));
-            // set a boolean in game state here about the round?
-            if(player.getCurrentGuess() > computer.getSecretNumber()){
+    public void runPlayerGuess(int guess) {
+        GuessResult result = this.gameState.calculateGuessResult(guess);
+
+
+        switch(result){
+            case LOSE_ROUND ->
+                this.printData(
+                        new PrintMessage(
+                                PrintMessageType.LOSS,
+                                Integer.toString(this.gameState.getRound().getComputer().getSecretNumber())
+                        ));
+            case HIGHER_KEEP_GOING ->
+                    this.printData(
+                        new PrintMessage(
+                                PrintMessageType.CUSTOM,
+                                GAME_DECLARATIONS[5]
+                        ));
+            case LOWER_KEEP_GOING ->
+                    this.printData(
+                        new PrintMessage(
+                                PrintMessageType.CUSTOM,
+                                GAME_DECLARATIONS[4]
+                        ));
+            case WIN_ROUND ->
                 this.printData(
                         new PrintMessage(
                                 PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[6]
+                                GAME_DECLARATIONS[2]
                         ));
-            }
-            if(player.getCurrentGuess() < computer.getSecretNumber()){
-                this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[7]
-                        ));
-            }
-        } else {
-            this.printData(
-                    new PrintMessage(
-                            PrintMessageType.CUSTOM,
-                            GAME_DECLARATIONS[3],
-                            GAME_DECLARATIONS[4]
-                    ));
+            default ->
+                throw new IllegalArgumentException("INVALID GUESS RESULT OBTAINED!!!"); //TODO: Catch this
         }
-    }
+        }
 
 
-    public void runRound(int roundNum, Player player){ // TODO: Eventually have a dialog box before you enter for difficulty choice
+    public void runRound(int roundNum, Player player){
         // STEP 1: start round and print it
         createNewRound(roundNum,player);
         this.printData(
@@ -123,11 +121,11 @@ public class GameController {
                 ));
 
         // STEP 3: play the round
-        // - STEP 3a: computer ask for guess | TODO: Add a wait method
+        // - STEP 3a: computer ask for guess
         this.printData(
                 new PrintMessage(
                         PrintMessageType.CUSTOM,
-                        GAME_DECLARATIONS[2]
+                        GAME_QUESTIONS[2]
                 ));
 
         // - STEP 3b: allow player to input guess

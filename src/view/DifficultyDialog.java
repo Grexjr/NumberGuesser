@@ -7,6 +7,9 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static controller.Strings.GAME_DECLARATIONS;
+import static controller.Strings.GAME_QUESTIONS;
+
 public class DifficultyDialog extends JDialog {
     // === CONSTANTS ===
     private static final int DIMENSION = 500;
@@ -18,7 +21,7 @@ public class DifficultyDialog extends JDialog {
 
     // === CONSTRUCTOR ===
     public DifficultyDialog(JFrame owner,String title){
-        super(owner, "CHOOSE DIFFICULTY", true);
+        super(owner, GAME_QUESTIONS[0], true);
         // Layout
         this.setSize(DIMENSION,DIMENSION);
         this.setLayout(new BorderLayout());
