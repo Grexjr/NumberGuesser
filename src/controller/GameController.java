@@ -71,7 +71,7 @@ public class GameController {
     // === RUN GAME METHODS ===
     public void runPlayerGuess(int guess) {
         GuessResult result = this.gameState.calculateGuessResult(guess);
-
+        this.gameGUI.getView().toggleInput(false);
 
         switch(result){
             case LOSE_ROUND ->
@@ -92,15 +92,21 @@ public class GameController {
                                 PrintMessageType.CUSTOM,
                                 GAME_DECLARATIONS[4]
                         ));
-            case WIN_ROUND ->
+            case WIN_ROUND -> {
                 this.printData(
                         new PrintMessage(
                                 PrintMessageType.CUSTOM,
                                 GAME_DECLARATIONS[2]
                         ));
+
+            }
             default ->
                 throw new IllegalArgumentException("INVALID GUESS RESULT OBTAINED!!!"); //TODO: Catch this
         }
+
+        this.gameGUI.getView().toggleInput(true);
+        this.gameGUI.getView().getInputViewer().getInputField().requestFocusInWindow();
+
         }
 
 
