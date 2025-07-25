@@ -23,6 +23,8 @@ public class GameDialog extends JDialog {
         this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
         // Buttons
+        this.add(buttonsPanel,BorderLayout.SOUTH);
+        buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.addButtons(buttonsPanel);
     }
 

@@ -24,10 +24,6 @@ public class DifficultyDialog extends GameDialog {
     public DifficultyDialog(JFrame owner){
         super(owner,DIFFICULTY_TITLE,DIFFICULTY_TEXT,DIFFICULTY_BUTTONS);
 
-        // Button panel
-        this.add(DIFFICULTY_BUTTONS,BorderLayout.SOUTH);
-        DIFFICULTY_BUTTONS.setLayout(new FlowLayout(FlowLayout.CENTER));
-
         // Set visible
         this.setVisible(true); // must go in every subclass, OR do it outside the subclass
     }
