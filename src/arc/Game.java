@@ -42,6 +42,7 @@ public class Game {
     public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
 
     public boolean isGameOver() {return gameOver;}
+    public void setGameOver(boolean val) {this.gameOver = val;}
 
     // === GAME HELPER METHODS ===
     private boolean checkGameOver(){return this.gameOver;}

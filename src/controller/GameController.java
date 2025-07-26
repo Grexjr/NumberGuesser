@@ -4,12 +4,10 @@ import arc.Difficulty;
 import arc.Game;
 import arc.GuessResult;
 import arc.Round;
-import obj.Computer;
 import obj.Player;
-import view.GameLog;
-import view.GameWindow;
-import view.PrintMessage;
-import view.PrintMessageType;
+import view.*;
+
+import javax.swing.*;
 
 import static controller.Strings.*;
 
@@ -67,6 +65,23 @@ public class GameController {
         });
     }
 
+    private void setContinueStatus(boolean value){
+        this.gameState.setGameOver(value);
+    }
+
+    private void checkContinueGame(RoundOverDialog roundOver){
+        if(roundOver.getGameOver()){
+            // increase game state round, generate new computer, new round
+            this.gameState.setRound(
+                    new Round(
+                            2,
+                            this.gameState.getGameDifficulty().getMaxGuesses(),
+                            this.gameState.getPlayer()));
+        } else {
+            System.exit(0);
+        }
+    }
+
 
     // === RUN GAME METHODS ===
     public void runPlayerGuess(int guess) {
@@ -74,12 +89,14 @@ public class GameController {
         this.gameGUI.getView().toggleInput(false);
 
         switch(result){
-            case LOSE_ROUND ->
+            case LOSE_ROUND ->{
                 this.printData(
                         new PrintMessage(
                                 PrintMessageType.LOSS,
                                 Integer.toString(this.gameState.getRound().getComputer().getSecretNumber())
                         ));
+                System.exit(0);
+            }
             case HIGHER_KEEP_GOING ->
                     this.printData(
                         new PrintMessage(
@@ -98,7 +115,32 @@ public class GameController {
                                 PrintMessageType.CUSTOM,
                                 GAME_DECLARATIONS[2]
                         ));
+                RoundOverDialog roundOver = new RoundOverDialog(
+                        this.gameGUI.getFrame(),
+                        gameState.getPlayer().getGuessList());
+                this.gameState.setGameOver(roundOver.getGameOver());
 
+                // DEBUG
+                System.out.println(roundOver.getGameOver());
+                System.out.println(gameState.isGameOver());
+
+                // Method to run logic when game state isGameOver is true
+                if(this.gameState.isGameOver()){
+                    // Print the message for game to be over
+                    this.printData(
+                            new PrintMessage(
+                                    PrintMessageType.CUSTOM,
+                                    GAME_DECLARATIONS[6],
+                                    // get the stats
+                                    GAME_DECLARATIONS[7]
+                            )
+                    );
+                    Timer time = new Timer(1000,_ -> System.exit(0));
+                    time.start();
+                } else {
+                    // TEMP: Logic to create new round, for now just system print then wait and exit
+                    System.out.println("New Round must be created!");
+                }
             }
             default ->
                 throw new IllegalArgumentException("INVALID GUESS RESULT OBTAINED!!!"); //TODO: Catch this

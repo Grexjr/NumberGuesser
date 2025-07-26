@@ -36,8 +36,11 @@ public class Strings {
             "You'll never guess that my number is lower than your guess! \n",
 
             // Computer tells higher guess declaration (5)
-            "You'll never guess that my number is higher than your guess! \n"
+            "You'll never guess that my number is higher than your guess! \n",
 
+            // Game Over declaration [6,7]
+            "Game is over! \n",
+            "\n Ending game..."
 
     };
 

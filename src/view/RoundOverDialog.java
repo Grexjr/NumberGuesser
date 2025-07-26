@@ -13,6 +13,9 @@ public class RoundOverDialog extends GameDialog{
     private static final JPanel ROUND_OVER_BUTTONS = new JPanel();
     // Do I have it as constant for here? I want to display the guess list on this, so probably not. pass as param
 
+    // === VARIABLES AND FIELDS ===
+    private boolean gameOver;
+
 
     // === CONSTRUCTOR ===
     public RoundOverDialog(JFrame owner, ArrayList<Integer> guessList){
@@ -21,11 +24,16 @@ public class RoundOverDialog extends GameDialog{
         // guess list... so I'll want to fix that. I may just have to overwrite the whole constructor from
         // the game dialog, or find some way to genericize the formatting there (maybe have none).
         // TODO: Remove formatting from game dialog superclass
+        this.gameOver = false;
 
         displayGuessList(guessList);
 
         this.setVisible(true);
     }
+
+
+    // === GETTER ===
+    public boolean getGameOver() {return this.gameOver;}
 
     private void displayGuessList(ArrayList<Integer> guessList){
         this.add(
@@ -45,12 +53,14 @@ public class RoundOverDialog extends GameDialog{
     protected ArrayList<JButton> createButtons(){
         JButton yes = new JButton("Yes");
         yes.addActionListener(_ -> {
-
+            this.gameOver = false;
+            this.dispose();
         });
 
         JButton no = new JButton("No");
         no.addActionListener(_ -> {
-
+            this.gameOver = true;
+            this.dispose();
         });
 
         ArrayList<JButton> buttonsList = new ArrayList<JButton>();
