@@ -5,11 +5,13 @@ import controller.GameController;
 import obj.Player;
 import view.*;
 
+import java.util.ArrayList;
+
 public class tester {
 
     public static void main(String[] args){
         GameWindow window = new GameWindow();
-        DifficultyDialog dialog = new DifficultyDialog(window.getFrame(),"DIFFICULTY");
+        DifficultyDialog dialog = new DifficultyDialog(window.getFrame());
         Game gameState = new Game();
         Player player = new Player();
 

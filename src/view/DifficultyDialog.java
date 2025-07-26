@@ -7,43 +7,25 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class DifficultyDialog extends JDialog {
-    // === CONSTANTS ===
-    private static final int DIMENSION = 500;
+import static controller.Strings.GAME_DECLARATIONS;
+import static controller.Strings.GAME_QUESTIONS;
+
+public class DifficultyDialog extends GameDialog {
+    // === CONSTANTS === //TODO: Centralize with other strings in hash map
     private static final String DIFFICULTY_TEXT = "Please choose a difficulty!\n";
+    private static final String DIFFICULTY_TITLE = "DIFFICULTY";
+    private static final JPanel DIFFICULTY_BUTTONS = new JPanel();
 
     // === VARIABLES AND FIELDS ===
     private Difficulty difficultyChoice;
 
 
     // === CONSTRUCTOR ===
-    public DifficultyDialog(JFrame owner,String title){
-        super(owner, "CHOOSE DIFFICULTY", true);
-        // Layout
-        this.setSize(DIMENSION,DIMENSION);
-        this.setLayout(new BorderLayout());
-
-        // Text
-        JLabel text = new JLabel(DIFFICULTY_TEXT,SwingConstants.CENTER);
-        this.add(text,BorderLayout.CENTER);
-
-
-        // Button panel
-        JPanel buttonPanel = new JPanel();
-        this.add(buttonPanel,BorderLayout.SOUTH);
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-        // Basics
-        this.setLocationRelativeTo(owner);
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-
-        // Buttons
-        for(JButton b : createDifficultyButtons()){
-            buttonPanel.add(b,BorderLayout.SOUTH);
-        }
+    public DifficultyDialog(JFrame owner){
+        super(owner,DIFFICULTY_TITLE,DIFFICULTY_TEXT,DIFFICULTY_BUTTONS);
 
         // Set visible
-        this.setVisible(true);
+        this.setVisible(true); // must go in every subclass, OR do it outside the subclass
     }
 
 
@@ -51,7 +33,8 @@ public class DifficultyDialog extends JDialog {
     public Difficulty getDifficultyChoice() {return difficultyChoice;}
 
     // === BUTTON!!! ===
-    private ArrayList<JButton> createDifficultyButtons(){
+    @Override
+    protected ArrayList<JButton> createButtons(){
         JButton easy = new JButton("Easy");
         easy.addActionListener(_ -> {
             this.difficultyChoice = Difficulty.EASY;

@@ -24,5 +24,4 @@ public class Inputter extends JTextField {
 
     // === BASIC METHODS ===
 
-
 }

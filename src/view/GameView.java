@@ -54,7 +54,6 @@ public class GameView extends JPanel {
     }
 
     // === BASIC METHODS ===
-    // === BASIC METHODS ===
     public void clear(){
         this.removeAll();
         this.refresh();
@@ -63,6 +62,11 @@ public class GameView extends JPanel {
     public void refresh(){
         this.revalidate();
         this.repaint();
+    }
+
+    // === HELPER METHODS ===
+    public void toggleInput(boolean allowOrNot){
+            this.getInputViewer().getInputField().setEnabled(allowOrNot);
     }
 
 
