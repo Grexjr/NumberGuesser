@@ -1,56 +1,32 @@
 package controller;
 
+import java.util.EnumMap;
+
 public class Strings {
 
     /*******************************************************************************************************************
      * A class of string constants for the controller to use whenever it needs to custom print data
      * QUESTION: SHOULD I MOVE THESE TO GAME VIEW AGAIN AND JUST CREATE A PRINT METHOD THERE?
-     * TODO: MAKE THESE HASH MAPS!!!
      ******************************************************************************************************************/
 
-    public static final String[] GAME_QUESTIONS = new String[]{
-            // Difficulty Q (0)
-            "WHICH DIFFICULTY?\n",
 
-            // Continue Q (1)
-            "Continue game?\n",
+    public static final EnumMap<GameStrings,String> GAME_QUESTIONS = new EnumMap<GameStrings,String>(GameStrings.class){{
+        put(GameStrings.DIFFICULTY_QUESTION,"WHICH DIFFICULTY?\n");
+        put(GameStrings.CONTINUE_QUESTION,"Continue game?\n");
+        put(GameStrings.GUESS_QUESTION,"What is your guess? \n\n");
 
-            // Computer ask for guess (2)
-            "What is your guess? \n\n"
-    };
+        put(GameStrings.WIN_DECLARATION,"You win!\n");
+        put(GameStrings.TRY_AGAIN_DECLARATION,"Try again!\n\n");
+        put(GameStrings.POSITIVE_RESULT_DECLARATION,
+                "You... win!? Impossible! \n Malfunctioning... need... System... reset.... \n\n");
+        put(GameStrings.NEGATIVE_RESULT_DECLARATION,"You fool... INCORRECT! \n");
+        put(GameStrings.HIGHER_GUESS_DECLARATION,"You'll never guess that my number is lower than your guess! \n");
+        put(GameStrings.LOWER_GUESS_DECLARATION,"You'll never guess that my number is higher than your guess! \n");
+        put(GameStrings.GAME_OVER_DECLARATION,"Game is over! \n \n Ending game...");
 
-    public static final String[] GAME_DECLARATIONS = new String[]{
-            // Win declaration (0)
-            "You win!\n",
+        put(GameStrings.SYSTEM_INVALID_INPUT,"INVALID INPUT!\n");
 
-            // Try again declaration (1)
-            "Try again!\n\n",
-
-            // Computer tells positive result declaration (2)
-            "You... win!? Impossible! \n Malfunctioning... need... System... reset.... \n\n",
-
-            // Computer tells negative result declaration (3)
-            "You fool... INCORRECT! \n",
-
-            // Computer tells lower guess declaration (4)
-            "You'll never guess that my number is lower than your guess! \n",
-
-            // Computer tells higher guess declaration (5)
-            "You'll never guess that my number is higher than your guess! \n",
-
-            // Game Over declaration [6,7]
-            "Game is over! \n",
-            "\n Ending game..."
-
-    };
-
-    public static final String[] SYSTEM_DECLARATIONS = new String[]{
-            // Invalid input declaration (0)
-            "INVALID INPUT!\n",
-    };
-
-
-
-
+        put(GameStrings.BASIC_STRING_NEWLINE,"\n");
+    }};
 
 }
