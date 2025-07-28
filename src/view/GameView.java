@@ -45,12 +45,11 @@ public class GameView extends JPanel {
         if(successOrFail){
             this.gameLog.log(
                 new PrintMessage(
-                        PrintMessageType.CUSTOM, inputViewer.getInputField().getText()+"\n")
+                        GameStrings.SYSTEM_INPUT,
+                        inputViewer.getInputField().getText()+"\n")
         );
         } else {
-            this.gameLog.log(
-                    new PrintMessage(PrintMessageType.CUSTOM,GAME_STRINGS_MAP.get(GameStrings.SYSTEM_INVALID_INPUT))
-            );
+            this.gameLog.log(new PrintMessage(GameStrings.SYSTEM_DECLARATIONS));
         }
         this.inputViewer.getInputField().setText("");
     }

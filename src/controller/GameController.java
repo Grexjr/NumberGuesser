@@ -92,29 +92,20 @@ public class GameController {
             case LOSE_ROUND ->{
                 this.printData(
                         new PrintMessage(
-                                PrintMessageType.LOSS,
+                                GameStrings.LOSS,
                                 Integer.toString(this.gameState.getRound().getComputer().getSecretNumber())
                         ));
                 System.exit(0);
             }
             case HIGHER_KEEP_GOING ->
                     this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_STRINGS_MAP.get(GameStrings.LOWER_GUESS_DECLARATION)
-                        ));
+                        new PrintMessage(GameStrings.LOWER_GUESS_DECLARATION));
             case LOWER_KEEP_GOING ->
                     this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_STRINGS_MAP.get(GameStrings.HIGHER_GUESS_DECLARATION)
-                        ));
+                        new PrintMessage(GameStrings.HIGHER_GUESS_DECLARATION));
             case WIN_ROUND -> {
                 this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_STRINGS_MAP.get(GameStrings.WIN_DECLARATION)
-                        ));
+                        new PrintMessage(GameStrings.WIN_DECLARATION));
                 RoundOverDialog roundOver = new RoundOverDialog(
                         this.gameGUI.getFrame(),
                         gameState.getPlayer().getGuessList());
@@ -129,8 +120,7 @@ public class GameController {
                     // Print the message for game to be over
                     this.printData(
                             new PrintMessage(
-                                    PrintMessageType.GAME_END,
-                                    // TODO: These stats aren't printing right, so need to fix the game code
+                                    GameStrings.GAME_END,
                                     Integer.toString(this.gameState.getPlayer().getRoundsWon()),
                                     Integer.toString(this.gameState.getPlayer().getShortestGuesses())
                             )
@@ -157,24 +147,21 @@ public class GameController {
         createNewRound(roundNum,player);
         this.printData(
                 new PrintMessage(
-                        PrintMessageType.ROUND,
+                        GameStrings.ROUND,
                         Integer.toString(this.gameState.getRound().getRoundNumber())
                 ));
 
         // STEP 2: print the introduction of the round
         this.printData(
                 new PrintMessage(
-                        PrintMessageType.INTRO,
+                        GameStrings.INTRO,
                         Integer.toString(this.gameState.getRound().getMaxGuesses())
                 ));
 
         // STEP 3: play the round
         // - STEP 3a: computer ask for guess
         this.printData(
-                new PrintMessage(
-                        PrintMessageType.CUSTOM,
-                        GAME_STRINGS_MAP.get(GameStrings.GUESS_QUESTION)
-                ));
+                new PrintMessage(GameStrings.GUESS_QUESTION));
 
         // - STEP 3b: allow player to input guess
 

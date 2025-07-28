@@ -1,63 +1,71 @@
 package view;
 
+import controller.GameStrings;
+
 import java.util.Arrays;
 
+import static controller.Strings.GAME_STRINGS_MAP;
+
 public class PrintMessage {
-    // QUESTION: Should I make these all one big array and choose from there?
-    // QUESTION: Or should I turn these into enums and just call their string components? Put these into type enum?
-    // === CONSTANTS ===
-    private static final String[] STRING_OPERATORS = new String[]{
-            // New line (0)
-            "\n",
-    };
+
 
     // === VARIABLES AND FIELDS ===
     private final String[] args;
 
-
-    // === CONSTRUCTOR
-    public PrintMessage(PrintMessageType type, String... vars){
+    // === CONSTRUCTOR ===
+    public PrintMessage(GameStrings type, String... vars){
+        // Switch for which type it is, only for those with vars
         switch(type){
             case INTRO -> this.args = new String[]{
-                    type.getStrings()[0],
+                    getString(GameStrings.INTRO)[0],
                     vars[0],
-                    type.getStrings()[1]};
+                    getString(GameStrings.INTRO)[1]
+            };
             case LOSS -> this.args = new String[]{
-                    type.getStrings()[0],
+                    getString(GameStrings.LOSS)[0],
                     vars[0],
-                    STRING_OPERATORS[0]
+                    getNewLine()
             };
             case GAME_END -> this.args = new String[]{
-                    type.getStrings()[0],
+                    getString(GameStrings.GAME_END)[0],
                     vars[0],
-                    STRING_OPERATORS[0],
-                    type.getStrings()[1],
+                    getNewLine(),
+                    getString(GameStrings.GAME_END)[1],
                     vars[1],
-                    type.getStrings()[2]
+                    getString(GameStrings.GAME_END)[2]
             };
             case ROUND -> this.args = new String[]{
-                    type.getStrings()[0],
+                    getString(GameStrings.ROUND)[0],
                     vars[0]
             };
             case GUESSES_LEFT -> this.args = new String[]{
-                    STRING_OPERATORS[0],
+                    getString(GameStrings.GUESSES_LEFT)[0],
                     vars[0],
-                    type.getStrings()[0]
+                    getString(GameStrings.GUESSES_LEFT)[0]
             };
             case GUESS_LIST -> this.args = new String[]{
-                    type.getStrings()[0],
-                    Arrays.toString(vars), // QUESTION: NOT SURE IF THIS WILL WORK OR NOT
-                    STRING_OPERATORS[0]
+                    getString(GameStrings.GUESS_LIST)[0],
+                    Arrays.toString(vars),
+                    getNewLine()
             };
-            default -> this.args = new String[]{
+            case SYSTEM_INPUT -> this.args = new String[]{
                     vars[0]
+            };
+            // Default handles ALL strings without vars
+            default -> this.args = new String[]{
+                    getString(type)[0]
             };
         }
     }
 
+    // === CONSTRUCTOR METHODS ===
+    private String[] getString(GameStrings type){
+        return GAME_STRINGS_MAP.get(type);
+    }
 
-    // === GETTERS ===
-    public String[] getArgs() {return args;}
+    private String getNewLine(){
+        return getString(GameStrings.BASIC_STRING_OPERATORS)[0];
+    }
 
 
     // === TO STRING ===
