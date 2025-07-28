@@ -1,9 +1,11 @@
 package view;
 
+import controller.GameStrings;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
-import static controller.Strings.GAME_QUESTIONS;
+import static controller.Strings.GAME_STRINGS_MAP;
 
 
 public class RoundOverDialog extends GameDialog{
@@ -43,7 +45,8 @@ public class RoundOverDialog extends GameDialog{
                                         .replace("[","")
                                         .replace("]","")
                                         .trim() + "\n" +
-                                GAME_QUESTIONS[1], //TODO: New JLabel for this and the other text that puts this bottom
+                                GAME_STRINGS_MAP.get(GameStrings.CONTINUE_QUESTION),
+                        //TODO: New JLabel for this and the other text that puts this bottom
                         SwingConstants.CENTER
                 )
         );

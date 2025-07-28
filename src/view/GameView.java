@@ -1,9 +1,11 @@
 package view;
 
+import controller.GameStrings;
+
 import javax.swing.*;
 import java.awt.*;
 
-import static controller.Strings.SYSTEM_DECLARATIONS;
+import static controller.Strings.GAME_STRINGS_MAP;
 
 public class GameView extends JPanel {
     // === CONSTANTS ===
@@ -47,7 +49,7 @@ public class GameView extends JPanel {
         );
         } else {
             this.gameLog.log(
-                    new PrintMessage(PrintMessageType.CUSTOM,SYSTEM_DECLARATIONS[0])
+                    new PrintMessage(PrintMessageType.CUSTOM,GAME_STRINGS_MAP.get(GameStrings.SYSTEM_INVALID_INPUT))
             );
         }
         this.inputViewer.getInputField().setText("");

@@ -6,11 +6,10 @@ public class Strings {
 
     /*******************************************************************************************************************
      * A class of string constants for the controller to use whenever it needs to custom print data
-     * QUESTION: SHOULD I MOVE THESE TO GAME VIEW AGAIN AND JUST CREATE A PRINT METHOD THERE?
+     * QUESTION: Make this a hashmap of enums and string arrays, then put all the print messages into here as well?
      ******************************************************************************************************************/
 
-
-    public static final EnumMap<GameStrings,String> GAME_QUESTIONS = new EnumMap<GameStrings,String>(GameStrings.class){{
+    public static final EnumMap<GameStrings,String> GAME_STRINGS_MAP = new EnumMap<GameStrings,String>(GameStrings.class){{
         put(GameStrings.DIFFICULTY_QUESTION,"WHICH DIFFICULTY?\n");
         put(GameStrings.CONTINUE_QUESTION,"Continue game?\n");
         put(GameStrings.GUESS_QUESTION,"What is your guess? \n\n");
@@ -22,7 +21,6 @@ public class Strings {
         put(GameStrings.NEGATIVE_RESULT_DECLARATION,"You fool... INCORRECT! \n");
         put(GameStrings.HIGHER_GUESS_DECLARATION,"You'll never guess that my number is lower than your guess! \n");
         put(GameStrings.LOWER_GUESS_DECLARATION,"You'll never guess that my number is higher than your guess! \n");
-        put(GameStrings.GAME_OVER_DECLARATION,"Game is over! \n \n Ending game...");
 
         put(GameStrings.SYSTEM_INVALID_INPUT,"INVALID INPUT!\n");
 

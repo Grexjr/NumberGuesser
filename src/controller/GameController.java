@@ -101,19 +101,19 @@ public class GameController {
                     this.printData(
                         new PrintMessage(
                                 PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[5]
+                                GAME_STRINGS_MAP.get(GameStrings.LOWER_GUESS_DECLARATION)
                         ));
             case LOWER_KEEP_GOING ->
                     this.printData(
                         new PrintMessage(
                                 PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[4]
+                                GAME_STRINGS_MAP.get(GameStrings.HIGHER_GUESS_DECLARATION)
                         ));
             case WIN_ROUND -> {
                 this.printData(
                         new PrintMessage(
                                 PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[2]
+                                GAME_STRINGS_MAP.get(GameStrings.WIN_DECLARATION)
                         ));
                 RoundOverDialog roundOver = new RoundOverDialog(
                         this.gameGUI.getFrame(),
@@ -121,21 +121,21 @@ public class GameController {
                 this.gameState.setGameOver(roundOver.getGameOver());
 
                 // DEBUG
-                System.out.println(roundOver.getGameOver());
-                System.out.println(gameState.isGameOver());
+                //System.out.println(roundOver.getGameOver());
+                //System.out.println(gameState.isGameOver());
 
                 // Method to run logic when game state isGameOver is true
                 if(this.gameState.isGameOver()){
                     // Print the message for game to be over
                     this.printData(
                             new PrintMessage(
-                                    PrintMessageType.CUSTOM,
-                                    GAME_DECLARATIONS[6],
-                                    // get the stats
-                                    GAME_DECLARATIONS[7]
+                                    PrintMessageType.GAME_END,
+                                    // TODO: These stats aren't printing right, so need to fix the game code
+                                    Integer.toString(this.gameState.getPlayer().getRoundsWon()),
+                                    Integer.toString(this.gameState.getPlayer().getShortestGuesses())
                             )
                     );
-                    Timer time = new Timer(1000,_ -> System.exit(0));
+                    Timer time = new Timer(5000,_ -> System.exit(0));
                     time.start();
                 } else {
                     // TEMP: Logic to create new round, for now just system print then wait and exit
@@ -173,7 +173,7 @@ public class GameController {
         this.printData(
                 new PrintMessage(
                         PrintMessageType.CUSTOM,
-                        GAME_QUESTIONS[2]
+                        GAME_STRINGS_MAP.get(GameStrings.GUESS_QUESTION)
                 ));
 
         // - STEP 3b: allow player to input guess
