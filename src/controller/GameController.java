@@ -92,50 +92,40 @@ public class GameController {
             case LOSE_ROUND ->{
                 this.printData(
                         new PrintMessage(
-                                PrintMessageType.LOSS,
+                                GameStrings.LOSS,
                                 Integer.toString(this.gameState.getRound().getComputer().getSecretNumber())
                         ));
                 System.exit(0);
             }
             case HIGHER_KEEP_GOING ->
                     this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[5]
-                        ));
+                        new PrintMessage(GameStrings.LOWER_GUESS_DECLARATION));
             case LOWER_KEEP_GOING ->
                     this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[4]
-                        ));
+                        new PrintMessage(GameStrings.HIGHER_GUESS_DECLARATION));
             case WIN_ROUND -> {
                 this.printData(
-                        new PrintMessage(
-                                PrintMessageType.CUSTOM,
-                                GAME_DECLARATIONS[2]
-                        ));
+                        new PrintMessage(GameStrings.WIN_DECLARATION));
                 RoundOverDialog roundOver = new RoundOverDialog(
                         this.gameGUI.getFrame(),
                         gameState.getPlayer().getGuessList());
                 this.gameState.setGameOver(roundOver.getGameOver());
 
                 // DEBUG
-                System.out.println(roundOver.getGameOver());
-                System.out.println(gameState.isGameOver());
+                //System.out.println(roundOver.getGameOver());
+                //System.out.println(gameState.isGameOver());
 
                 // Method to run logic when game state isGameOver is true
                 if(this.gameState.isGameOver()){
                     // Print the message for game to be over
                     this.printData(
                             new PrintMessage(
-                                    PrintMessageType.CUSTOM,
-                                    GAME_DECLARATIONS[6],
-                                    // get the stats
-                                    GAME_DECLARATIONS[7]
+                                    GameStrings.GAME_END,
+                                    Integer.toString(this.gameState.getPlayer().getRoundsWon()),
+                                    Integer.toString(this.gameState.getPlayer().getShortestGuesses())
                             )
                     );
-                    Timer time = new Timer(1000,_ -> System.exit(0));
+                    Timer time = new Timer(5000,_ -> System.exit(0));
                     time.start();
                 } else {
                     // TEMP: Logic to create new round, for now just system print then wait and exit
@@ -157,24 +147,21 @@ public class GameController {
         createNewRound(roundNum,player);
         this.printData(
                 new PrintMessage(
-                        PrintMessageType.ROUND,
+                        GameStrings.ROUND,
                         Integer.toString(this.gameState.getRound().getRoundNumber())
                 ));
 
         // STEP 2: print the introduction of the round
         this.printData(
                 new PrintMessage(
-                        PrintMessageType.INTRO,
+                        GameStrings.INTRO,
                         Integer.toString(this.gameState.getRound().getMaxGuesses())
                 ));
 
         // STEP 3: play the round
         // - STEP 3a: computer ask for guess
         this.printData(
-                new PrintMessage(
-                        PrintMessageType.CUSTOM,
-                        GAME_QUESTIONS[2]
-                ));
+                new PrintMessage(GameStrings.GUESS_QUESTION));
 
         // - STEP 3b: allow player to input guess
 

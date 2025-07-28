@@ -7,9 +7,6 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static controller.Strings.GAME_DECLARATIONS;
-import static controller.Strings.GAME_QUESTIONS;
-
 public class DifficultyDialog extends GameDialog {
     // === CONSTANTS === //TODO: Centralize with other strings in hash map
     private static final String DIFFICULTY_TEXT = "Please choose a difficulty!\n";

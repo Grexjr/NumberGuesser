@@ -76,11 +76,6 @@ public class Game {
                 this.player.getShortestGuesses() + "\n";
     }
 
-    // method to print end of game
-    public String printEnd(){return "Game is over! \n" +
-            printStats() +
-            "\n Ending game...";}
-
     // === GAMEPLAY METHODS ===
     // increase player guess number
     public void increaseGuess(){
