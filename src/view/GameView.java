@@ -14,7 +14,6 @@ public class GameView extends JPanel {
     private final GameLog gameLog;
     private final InputView inputViewer;
     private int inputtedGuess;
-    private boolean isGuessDone;
 
 
     // === CONSTRUCTOR ===
@@ -24,7 +23,6 @@ public class GameView extends JPanel {
         this.inputViewer = new InputView();
 
         this.inputtedGuess = -1;
-        this.isGuessDone = false;
 
         this.add(this.gameLog.getScroller(), BorderLayout.CENTER);
         this.add(this.inputViewer, BorderLayout.SOUTH);
@@ -37,8 +35,6 @@ public class GameView extends JPanel {
     public InputView getInputViewer() {return inputViewer;}
 
     public int getInputtedGuess() {return inputtedGuess;}
-
-    public boolean getGuessDone() {return isGuessDone;}
 
     // === DISPLAY METHODS ===
     public void logInput(boolean successOrFail){
@@ -69,6 +65,8 @@ public class GameView extends JPanel {
     public void toggleInput(boolean allowOrNot){
             this.getInputViewer().getInputField().setEnabled(allowOrNot);
     }
+
+    public void printData(PrintMessage data){gameLog.log(data);}
 
 
 }
