@@ -46,7 +46,7 @@ public class PrintMessage {
             case GUESS_LIST -> this.args = new String[]{
                     getString(GameStrings.GUESS_LIST)[0],
                     Arrays.toString(vars),
-                    getNewLine()
+                    //TODO: Get some way to do a new line -- need to do html within the JLabel.......
             };
             case SYSTEM_INPUT -> this.args = new String[]{
                     vars[0]

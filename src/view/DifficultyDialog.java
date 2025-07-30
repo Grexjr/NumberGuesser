@@ -1,17 +1,21 @@
 package view;
 
 import arc.Difficulty;
+import controller.GameStrings;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static controller.Strings.GAME_STRINGS_MAP;
+
 public class DifficultyDialog extends GameDialog {
-    // === CONSTANTS === //TODO: Centralize with other strings in hash map
-    private static final String DIFFICULTY_TEXT = "Please choose a difficulty!\n";
-    private static final String DIFFICULTY_TITLE = "DIFFICULTY";
+    // === CONSTANTS ===
+    private static final JLabel DIFFICULTY_TEXT = new JLabel(new PrintMessage(GameStrings.DIFFICULTY_QUESTION).toString());
+    private static final String DIFFICULTY_TITLE = "DIFFICULTY"; // TODO: Consolidate with game strings
     private static final JPanel DIFFICULTY_BUTTONS = new JPanel();
+    private static final JPanel DISPLAY_PANEL = new JPanel();
 
     // === VARIABLES AND FIELDS ===
     private Difficulty difficultyChoice;
@@ -19,10 +23,16 @@ public class DifficultyDialog extends GameDialog {
 
     // === CONSTRUCTOR ===
     public DifficultyDialog(JFrame owner){
-        super(owner,DIFFICULTY_TITLE,DIFFICULTY_TEXT,DIFFICULTY_BUTTONS);
+        super(owner,DIFFICULTY_TITLE,DISPLAY_PANEL,DIFFICULTY_BUTTONS,new BorderLayout());
+
+        // Display Information
+        DISPLAY_PANEL.setLayout(new GridLayout(0,1));
+        DISPLAY_PANEL.add(DIFFICULTY_TEXT);
+        DIFFICULTY_TEXT.setHorizontalAlignment(SwingConstants.CENTER);
+        DIFFICULTY_TEXT.setVerticalAlignment(SwingConstants.CENTER);
 
         // Set visible
-        this.setVisible(true); // must go in every subclass, OR do it outside the subclass
+        this.setVisible(true);
     }
 
 

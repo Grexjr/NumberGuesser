@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 
 public class Strings {
@@ -90,7 +91,7 @@ public class Strings {
         put(
                 GameStrings.GUESS_LIST,
                 new String[]{
-                        "You guessed:\n"
+                        "You guessed:"
                 }
         );
 

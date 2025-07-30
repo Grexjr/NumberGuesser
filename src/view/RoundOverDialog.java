@@ -3,16 +3,20 @@ package view;
 import controller.GameStrings;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static controller.Strings.GAME_STRINGS_MAP;
 
 
 public class RoundOverDialog extends GameDialog{
     // === CONSTANTS ===
-    private static final String ROUND_OVER_TITLE = "ROUND OVER";
-    private static final String ROUND_OVER_TEXT = "Guess List:\n";
+    private static final String ROUND_OVER_TITLE = "ROUND OVER"; // TODO: Consolidate with game strings
     private static final JPanel ROUND_OVER_BUTTONS = new JPanel();
+    private static final JPanel ROUND_OVER_DISPLAY = new JPanel();
+    private static final LayoutManager LAYOUT = new GridLayout(0,1);
+    private static final JLabel CONTINUE_QUESTION = new JLabel(new PrintMessage(GameStrings.CONTINUE_QUESTION).toString());
     // Do I have it as constant for here? I want to display the guess list on this, so probably not. pass as param
 
     // === VARIABLES AND FIELDS ===
@@ -21,14 +25,17 @@ public class RoundOverDialog extends GameDialog{
 
     // === CONSTRUCTOR ===
     public RoundOverDialog(JFrame owner, ArrayList<Integer> guessList){
-        super(owner,ROUND_OVER_TITLE,ROUND_OVER_TEXT,ROUND_OVER_BUTTONS);
-        // SO this is technically creating two JLabels, the first with "Guess List:\n", the second with that AND the
-        // guess list... so I'll want to fix that. I may just have to overwrite the whole constructor from
-        // the game dialog, or find some way to genericize the formatting there (maybe have none).
-        // TODO: Remove formatting from game dialog superclass
-        this.gameOver = false;
+        super(owner,ROUND_OVER_TITLE,ROUND_OVER_DISPLAY,ROUND_OVER_BUTTONS,LAYOUT);
 
-        displayGuessList(guessList);
+        // Display Information
+        ROUND_OVER_DISPLAY.setLayout(new GridLayout(0,1));
+
+        ROUND_OVER_DISPLAY.add(displayGuessList(guessList));
+
+        ROUND_OVER_DISPLAY.add(CONTINUE_QUESTION);
+        CONTINUE_QUESTION.setHorizontalAlignment(SwingConstants.CENTER);
+
+        this.gameOver = false;
 
         this.setVisible(true);
     }
@@ -37,19 +44,11 @@ public class RoundOverDialog extends GameDialog{
     // === GETTER ===
     public boolean getGameOver() {return this.gameOver;}
 
-    private void displayGuessList(ArrayList<Integer> guessList){
-        this.add(
-                new JLabel(
-                        ROUND_OVER_TEXT +
-                                guessList.toString()
-                                        .replace("[","")
-                                        .replace("]","")
-                                        .trim() + "\n" +
-                                GAME_STRINGS_MAP.get(GameStrings.CONTINUE_QUESTION),
-                        //TODO: New JLabel for this and the other text that puts this bottom
-                        SwingConstants.CENTER
-                )
-        );
+    private JLabel displayGuessList(ArrayList<Integer> guessList){ // TODO: Redo the box so both these show up
+        return new JLabel(
+                        new PrintMessage(
+                                GameStrings.GUESS_LIST,
+                                String.valueOf(guessList)).toString());
     }
 
     @Override
