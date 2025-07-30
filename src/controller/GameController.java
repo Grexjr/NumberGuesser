@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class GameController {
 
-    // === VARIABLES AND FIELDS === | QUESTION: Maybe should go in constructor since not ever accessed by other stuff
+    // === VARIABLES AND FIELDS ===
     private final Game gameState;
     private final GameWindow gameGUI;
     private final GameView view;
@@ -40,7 +40,7 @@ public class GameController {
     }
 
     // === INPUT METHODS ===
-    private int displayInput() throws NumberFormatException{ // TODO: Rename this method because it does more
+    private int displayInput() throws NumberFormatException{
             int guess = Integer.parseInt(this.gameGUI.getView().getInputViewer().getInputField().getText());
             view.logInput(true);
             return guess;

@@ -30,7 +30,7 @@ public class GameView extends JPanel {
 
 
     // === DISPLAY METHODS ===
-    public void printRoundStart(int roundNum, int maxGuess){ // TODO: Move this to game View except create new round
+    public void printRoundStart(int roundNum, int maxGuess){
         // STEP 1: print round info
        this.gameLog.log(
                 new PrintMessage(
