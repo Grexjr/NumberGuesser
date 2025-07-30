@@ -54,6 +54,7 @@ public class GameController {
                 runGuessResult(guess);
             } catch (NumberFormatException e){
                 view.logInput(false);
+                view.toggleInput(true);
             }
             view.getInputViewer().getInputField().requestFocusInWindow();
         });
