@@ -21,11 +21,6 @@ public class Game {
 
         // Create new player tracked through all rounds
         this.player = new Player();
-
-        // Print the introduction
-        System.out.println(printIntro());
-
-        //playGame(1);
     }
 
 
@@ -44,44 +39,16 @@ public class Game {
     public boolean isGameOver() {return gameOver;}
     public void setGameOver(boolean val) {this.gameOver = val;}
 
+
     // === GAME HELPER METHODS ===
-    private boolean checkGameOver(){return this.gameOver;}
 
     // --- GAME STAT METHODS ---
-
-    // Rounds won methods
-    public void givePlayerRoundWon(){this.player.winRound();}
-
-    // Calculate both stats method
-    public void calculateStats(){
-        givePlayerRoundWon();
-        // Don't give player lowest guess because that happens at end of each round
-        //TODO: Make giving player lowest guess occur in round.java
-    }
 
 
     // === GAME PRINT METHODS ===
 
-    // method to print opening
-    public String printIntro(){
-        return "Welcome to the number guessing game! \n\n";
-    }
-
-    // method to print stats
-    public String printStats(){
-        return "Stats: \n"+
-                "Rounds won: " +
-                this.player.getRoundsWon() + "\n" +
-                "Your record for shortest guesses is: " +
-                this.player.getShortestGuesses() + "\n";
-    }
 
     // === GAMEPLAY METHODS ===
-    // increase player guess number
-    public void increaseGuess(){
-
-    }
-
     // return which guess result is appropriate | QUESTION: Should this go in round?
     public GuessResult calculateGuessResult(int guess){
         Computer computer = this.getRound().getComputer();
