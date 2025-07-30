@@ -1,6 +1,7 @@
 package arc;
 
 import obj.Choice;
+import obj.Computer;
 import obj.Player;
 
 public class Game {
@@ -8,8 +9,8 @@ public class Game {
     // === GAME VARIABLES ===
     private Round round;
     private final Player player;
-    private final Difficulty gameDifficulty;
-    private final int maxGuesses;
+    private Difficulty gameDifficulty;
+    private int maxGuesses;
     private boolean gameOver;
 
 
@@ -24,17 +25,24 @@ public class Game {
         // Print the introduction
         System.out.println(printIntro());
 
-        // Print asking for difficulty
-        System.out.println(askDifficulty());
-        this.gameDifficulty = chooseDifficulty();
-        this.maxGuesses = this.gameDifficulty.getMaxGuesses();
-
-        playGame(1);
+        //playGame(1);
     }
 
 
     // === GETTERS AND SETTERS ===
-    // None, since game only ever accesses itself and nothing accesses it (until GUI is added)
+    public Round getRound() {return round;}
+    public void setRound(Round nextRound) {this.round = nextRound;}
+
+    public Player getPlayer() {return player;}
+
+    public Difficulty getGameDifficulty() {return gameDifficulty;}
+    public void setGameDifficulty(Difficulty difficulty) {this.gameDifficulty = difficulty;}
+
+    public int getMaxGuesses() {return maxGuesses;}
+    public void setMaxGuesses(int guesses) {this.maxGuesses = guesses;}
+
+    public boolean isGameOver() {return gameOver;}
+    public void setGameOver(boolean val) {this.gameOver = val;}
 
     // === GAME HELPER METHODS ===
     private boolean checkGameOver(){return this.gameOver;}
@@ -59,27 +67,6 @@ public class Game {
         return "Welcome to the number guessing game! \n\n";
     }
 
-    // method to print asking for difficulty
-    public String askDifficulty(){
-        return "What difficulty would you like? \n (type: easy, medium, hard, or impossible) \n";
-    }
-
-    // method to print loss
-    public String printLoss(){
-        return "You Lose! Muahahaha! No more games for you! \n\n" +
-                "The number was " + this.round.getComputer().getSecretNumber() +
-                "\n"
-                ;}
-
-    // method to print win
-    public String printWin(){return "You win! \n";}
-
-    // method to print try again
-    public String printTryAgain(){return "Try again! \n\n";}
-
-    // method to print continue or not
-    public String printContinueQuestion(){return "Continue game? \n (type yes or no) \n";}
-
     // method to print stats
     public String printStats(){
         return "Stats: \n"+
@@ -89,73 +76,32 @@ public class Game {
                 this.player.getShortestGuesses() + "\n";
     }
 
-    // method to print end of game
-    public String printEnd(){return "Game is over! \n" +
-            printStats() +
-            "\n Ending game...";}
-
-    // Helper methods
-    // Method for changing the difficulty
-    public Difficulty chooseDifficulty(){
-        return switch (this.player.detectChoice(1)) {
-            case Choice.EASY -> Difficulty.EASY;
-            case Choice.MEDIUM -> Difficulty.MEDIUM;
-            case Choice.HARD -> Difficulty.HARD;
-            case Choice.IMPOSSIBLE -> Difficulty.IMPOSSIBLE;
-            default -> {
-                System.out.print("INVALID CHOICE! Setting to impossible...\n");
-                yield Difficulty.IMPOSSIBLE;
-            }
-        };
-    }
-
-    // Method for continue or not choice
-    private void runContinueChoice(int roundNum){
-        System.out.print(printContinueQuestion());
-        if(this.player.detectChoice(2).equals(Choice.YES)){
-            this.round = new Round(roundNum,this.maxGuesses,this.player);
-        } else {
-            System.out.print(printEnd());
-            this.gameOver = true;
-            System.exit(0);
-        }
-    }
-
     // === GAMEPLAY METHODS ===
+    // increase player guess number
+    public void increaseGuess(){
 
-    // Win method -- no win game, goes on forever
-    private int win(int roundNum){
-        System.out.print(printWin());
-        calculateStats();
-        return roundNum + 1;
     }
 
-    // Lose game method
-    private void lose(){
-        System.out.print(printLoss());
-        System.out.print(printEnd());
-    }
+    // return which guess result is appropriate | QUESTION: Should this go in round?
+    public GuessResult calculateGuessResult(int guess){
+        Computer computer = this.getRound().getComputer();
+        player.guessNumber(guess);
 
-    // PLAY GAME METHOD
-    //TODO: Refactor this method, if it needs it, for clarity and simplicity and ease of understanding
-    public void playGame(int roundNum) {
-        while (!checkGameOver()) {
-            this.round = new Round(roundNum, this.maxGuesses, this.player);
-            while (!this.round.checkLoss(this.player)){
-                this.round.playRound(this.player);
-                if (this.round.checkLoss(this.player)) {
-                    lose();
-                    break;
+        if(guess != computer.getSecretNumber()){
+            if(player.getGuessNumber() >= this.getRound().getMaxGuesses()){
+                return GuessResult.LOSE_ROUND;
+            } else {
+                if (guess > computer.getSecretNumber()) {
+                    return GuessResult.LOWER_KEEP_GOING;
                 }
-                if (this.round.getRoundOver()) {
-                    System.out.print(this.round.printGuessList(this.player));
-                    int newRound = win(roundNum);
-                    runContinueChoice(newRound);
-                } else {
-                    System.out.print(printTryAgain());
+                if (guess < computer.getSecretNumber()) {
+                    return GuessResult.HIGHER_KEEP_GOING;
                 }
             }
+        } else {
+            return GuessResult.WIN_ROUND;
         }
+        return GuessResult.INVALID_RESULT; // TODO: error handling here
     }
 
 

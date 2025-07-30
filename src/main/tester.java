@@ -1,17 +1,24 @@
 package main;
 
 import arc.Game;
-import view.GameView;
-import view.GameWindow;
-import view.PrintMessage;
-import view.PrintMessageType;
+import controller.GameController;
+import obj.Player;
+import view.*;
+
+import java.util.ArrayList;
 
 public class tester {
 
     public static void main(String[] args){
         GameWindow window = new GameWindow();
+        DifficultyDialog dialog = new DifficultyDialog(window.getFrame());
+        Game gameState = new Game();
+        Player player = new Player();
 
-        window.getView().getGameLog().log(new PrintMessage(PrintMessageType.INTRO,Integer.toString(15)));
+        GameController controller = new GameController(gameState,window);
+        controller.setDifficulty(dialog.getDifficultyChoice());
+
+        controller.runRound(1,player);
 
 
 
