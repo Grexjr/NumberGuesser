@@ -86,16 +86,6 @@ public class Round {
 
     // === PLAY ROUNDS METHODS ===
 
-    // PLAY ROUND METHOD
-    public void playRound(Player player){
-        while(!getRoundOver()){
-            System.out.print(this.computer.askForGuess());
-            System.out.print(playRoundResults(player.guessNumber()));
-            if(!getRoundOver()) {System.out.print(printGuessesLeft(player.getGuessNumber()));}
-        }
-        player.calculateLowestGuess();
-    }
-
     // PLAY ROUND RESULTS
     public String playRoundResults(int guess){
         if(computer.checkGuess(guess)){this.roundOver = true;}

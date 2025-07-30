@@ -9,3 +9,7 @@ survived, and correct:incorrect guess ratio?
 2. Add a hint system based on difficulty of hints that the player decides after difficulty, or tie it to difficulty.
 
 3. Add a GUI!
+
+4. Formatter class for the GUI
+
+5. Add a check for blank textfield to not input any strings
