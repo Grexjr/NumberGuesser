@@ -1,15 +1,37 @@
+########################################################################################################################
+
 Future plans:
-
 TODO ALWAYS: REFACTOR REFACTOR REFACTOR REFACTOR!!!
-
 1. Add stat calculations and stat printing at the end of the game to show shortest guessed round, number of rounds
 survived, and correct:incorrect guess ratio?
 --- DONE except for correct:incorrect guess ratio, which honestly won't be added or do much
-
 2. Add a hint system based on difficulty of hints that the player decides after difficulty, or tie it to difficulty.
-
-3. Add a GUI!
-
 4. Formatter class for the GUI
+5. Add a utilities class: slow printing, timers, etc.
+6. Use the Choice Enum with the other buttons that have been created (i.e. round and difficulty dialog boxes)
+7. Create system logs that describe what is happening behind the scenes with values, etc.
 
-5. Add a check for blank textfield to not input any strings
+########################################################################################################################
+
+BUG LIST:
+1. Yes/No created multiple times on round over boxes
+2. Stats at the end of the game print incorrectly
+     --- May want to put them as a separate dialog box that gives these stats
+3. Guess List prints without proper formatting
+
+########################################################################################################################
+
+CURRENT NEXT STEPS:
+1. Squash this branch into main on July 31. Then, create a new branch to add the game over dialog box that prints stats
+with an "OK" button. Then, fix the bug where the game stats do not print correctly in that box. Commit that branch to
+main on August 1. Then, fix the round over dialog box bugs and formatting for the dialog boxes. Merge that on August 3,
+creating the branch on August 2. Then, decide from there.
+
+Jul 31: Squash BUG-FIXES-AND-REFACTORING into main. Start work on game over dialog box.
+Aug 1: Create new branch for this game over dialog box.
+Aug 2: Squash game over dialog box to main after fixing, testing, and refactoring. Start work on fixing dialog box bugs
+and formatting.
+Aug 3: Create branch for fixing bugs and formatting.
+Aug 4: Squash branch into main after fixing, testing, and refactoring.
+
+########################################################################################################################

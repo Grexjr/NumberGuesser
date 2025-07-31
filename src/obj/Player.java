@@ -36,30 +36,8 @@ public class Player {
 
     // === PLAYER HELPER METHODS ===
 
-    // Check if player exceeds certain guess limit (true exceeds or meets, false doesn't)
-    public boolean exceedsGuess(int guessNum){return this.guessNumber >= guessNum;}
-
-    // Win round methods
-    private int incrementWonRounds(){return this.roundsWon + 1;}
-    public void winRound(){this.setRoundsWon(incrementWonRounds());}
-
 
     // === PLAYER STAT METHODS ===
-
-    // --- Player shortest guesses methods ---
-
-    // check if an integer is smaller than the shortest guess
-    private boolean isGuessQuicker(int guessNum){return guessNum < shortestGuesses;}
-
-    // save the lowest guess into shortestGuesses if it is quicker
-    private void saveLowestGuess(int guessNum){
-        if(isGuessQuicker(guessNum)){
-            this.shortestGuesses = guessNum;
-        }
-    }
-
-    // calculate the lowest guess
-    public void calculateLowestGuess(){saveLowestGuess(this.guessNumber);}
 
 
     // === PLAYER ACTION METHODS ===
@@ -70,21 +48,6 @@ public class Player {
         this.currentGuess = guess;
         this.guessList.add(currentGuess);
     }
-
-    // Make choice methods
-    public Choice detectChoice(int choiceSet){
-        ArrayList<Choice> possibleChoices = Choice.possibleChoices(choiceSet);
-        Scanner kb = new Scanner(System.in);
-        String choice = kb.nextLine();
-
-        for(Choice bankedChoice : possibleChoices){
-            if(choice.equalsIgnoreCase(bankedChoice.getChoiceLabel())){
-                return bankedChoice;
-            }
-        }
-        return Choice.INVALID;
-    }
-
 
 
 

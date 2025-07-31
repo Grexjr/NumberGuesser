@@ -8,15 +8,14 @@ public class GameDialog extends JDialog {
     // === CONSTANTS ===
     private static final int DIMENSION = 500;
 
-    public GameDialog(JFrame owner, String title, String text, JPanel buttonsPanel){
-        super(owner, title, true); // TODO: catch the null, or some other error
+    public GameDialog(JFrame owner, String title, JPanel displayPanel, JPanel buttonsPanel, LayoutManager layout){
+        super(owner, title, true);
         // Layout
         this.setSize(DIMENSION,DIMENSION);
-        this.setLayout(new BorderLayout());
+        this.setLayout(layout);
 
-        // Text
-        JLabel displayText = new JLabel(text,SwingConstants.CENTER);
-        this.add(displayText,BorderLayout.CENTER);
+        // Panels
+        this.add(displayPanel,BorderLayout.CENTER);
 
         // Basics
         this.setLocationRelativeTo(owner);
