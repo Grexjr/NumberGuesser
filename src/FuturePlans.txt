@@ -27,7 +27,7 @@ with an "OK" button. Then, fix the bug where the game stats do not print correct
 main on August 1. Then, fix the round over dialog box bugs and formatting for the dialog boxes. Merge that on August 3,
 creating the branch on August 2. Then, decide from there.
 
-Jul 31: Squash BUG-FIXES-AND-REFACTORING into main. Start work on game over dialog box.
+ XXX Jul 31: Squash BUG-FIXES-AND-REFACTORING into main. Start work on game over dialog box.
 Aug 1: Create new branch for this game over dialog box.
 Aug 2: Squash game over dialog box to main after fixing, testing, and refactoring. Start work on fixing dialog box bugs
 and formatting.

@@ -66,7 +66,7 @@ public class RoundOverDialog extends GameDialog{
         });
 
         ArrayList<JButton> buttonsList = new ArrayList<JButton>();
-        buttonsList.add(yes);
+        buttonsList.add(yes); // TODO: This is likely causing multiple buttons, super already has add buttons.
         buttonsList.add(no);
         return buttonsList;
     }
