@@ -11,6 +11,7 @@ public class tester {
 
     public static void main(String[] args){
         GameWindow window = new GameWindow();
+        //GameOverDialog over = new GameOverDialog(window.getFrame(),1,1);
         DifficultyDialog dialog = new DifficultyDialog(window.getFrame());
         ArrayList<Integer> arary = new ArrayList<Integer>();
         arary.add(4);arary.add(4);arary.add(4);arary.add(4);arary.add(4);arary.add(4);arary.add(4);
