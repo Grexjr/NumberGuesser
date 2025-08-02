@@ -28,10 +28,10 @@ main on August 1. Then, fix the round over dialog box bugs and formatting for th
 creating the branch on August 2. Then, decide from there.
 
  XXX Jul 31: Squash BUG-FIXES-AND-REFACTORING into main. Start work on game over dialog box.
-Aug 1: Create new branch for this game over dialog box.
-Aug 2: Squash game over dialog box to main after fixing, testing, and refactoring. Start work on fixing dialog box bugs
+ XXX Aug 1: Create new branch for this game over dialog box.
+Aug 2-3: Squash game over dialog box to main after fixing, testing, and refactoring. Start work on fixing dialog box bugs
 and formatting.
-Aug 3: Create branch for fixing bugs and formatting.
-Aug 4: Squash branch into main after fixing, testing, and refactoring.
+Aug 6: Create branch for fixing bugs and formatting.
+By Aug 9: Squash branch into main after fixing, testing, and refactoring.
 
 ########################################################################################################################

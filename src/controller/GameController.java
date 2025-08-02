@@ -69,12 +69,11 @@ public class GameController {
         this.gameState.setGameOver(roundOver.getGameOver());
 
         if(this.gameState.isGameOver()){
-            this.gameGUI.getView().printGameOver(
+            new GameOverDialog(
+                    this.gameGUI.getFrame(),
                     this.gameState.getPlayer().getRoundsWon(),
                     this.gameState.getPlayer().getShortestGuesses()
             );
-            Timer time = new Timer(5000,_ -> System.exit(0)); //TODO: Util for timers
-            time.start();
         } else {
             createNewRound(gameState.getRound().getRoundNumber() + 1,gameState.getPlayer());
         }
